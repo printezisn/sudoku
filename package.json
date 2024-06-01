@@ -10,7 +10,7 @@
     "start": "vite --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "format": "npm run lint -- --fix"
   },
   "devDependencies": {
