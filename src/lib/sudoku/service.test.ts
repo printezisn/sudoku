@@ -1,12 +1,16 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { analyzeBoard, createBoard } from './service';
+import { analyzeBoard, changeColor, createBoard } from './service';
 import type { Board } from './models';
 
 describe('sudoku service', () => {
+  let board: Board;
+
+  beforeEach(() => {
+    board = createBoard();
+  });
+
   describe('createBoard', () => {
     it('creates a new board', () => {
-      const board = createBoard();
-
       expect(board).toMatchObject({
         finished: false,
         currentColor: 0,
@@ -25,12 +29,6 @@ describe('sudoku service', () => {
   });
 
   describe('analyzeBoard', () => {
-    let board: Board;
-
-    beforeEach(() => {
-      board = createBoard();
-    });
-
     it('sets available cell options correctly', () => {
       board.cells[40].value = 5;
       analyzeBoard(board);
@@ -135,6 +133,22 @@ describe('sudoku service', () => {
       }
 
       expect(board.finished).toBeFalsy();
+    });
+  });
+
+  describe('changeColor', () => {
+    it('changes to the correct color when it is below limit', () => {
+      board.currentColor = 2;
+      changeColor(board);
+
+      expect(board.currentColor).toEqual(3);
+    });
+
+    it('changes to the correct color when it is on limit', () => {
+      board.currentColor = 4;
+      changeColor(board);
+
+      expect(board.currentColor).toEqual(0);
     });
   });
 });

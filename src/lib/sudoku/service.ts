@@ -1,5 +1,7 @@
 import type { Board } from './models';
 
+const COLOR_LIMIT = 5;
+
 export const createBoard = (): Board => ({
   cells: Array(81)
     .fill(null)
@@ -66,4 +68,8 @@ export const analyzeBoard = (board: Board) => {
       board.finished = false;
     }
   }
+};
+
+export const changeColor = (board: Board) => {
+  board.currentColor = (board.currentColor + 1) % COLOR_LIMIT;
 };
