@@ -13,8 +13,9 @@ export enum ActionType {
 
 export interface Action {
   type: ActionType;
-  from: string | null;
-  to: string | null;
+  cellIndex: number | null;
+  from: number | string | null;
+  to: number | string | null;
 }
 
 export interface Board {

@@ -1,6 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { analyzeBoard, changeColor, createBoard } from './service';
-import type { Board } from './models';
+import {
+  analyzeBoard,
+  changeColor,
+  createBoard,
+  setCellValue,
+  undo,
+  undoColor,
+} from './service';
+import { ActionType, Board } from './models';
 
 describe('sudoku service', () => {
   let board: Board;
@@ -142,6 +149,12 @@ describe('sudoku service', () => {
       changeColor(board);
 
       expect(board.currentColor).toEqual(3);
+      expect(board.actions[0]).toEqual({
+        cellIndex: null,
+        from: 2,
+        to: 3,
+        type: ActionType.COLOR_CHANGE,
+      });
     });
 
     it('changes to the correct color when it is on limit', () => {
@@ -149,6 +162,105 @@ describe('sudoku service', () => {
       changeColor(board);
 
       expect(board.currentColor).toEqual(0);
+      expect(board.actions[0]).toEqual({
+        cellIndex: null,
+        from: 4,
+        to: 0,
+        type: ActionType.COLOR_CHANGE,
+      });
+    });
+  });
+
+  describe('setCellValue', () => {
+    it('sets the cell value successfully', () => {
+      board.currentColor = 1;
+      setCellValue(board, 4, 5);
+
+      expect(board.cells[4].value).toEqual(5);
+      expect(board.cells[4].color).toEqual(1);
+      expect(board.cells[5].options).toEqual(new Set([1, 2, 3, 4, 6, 7, 8, 9]));
+    });
+  });
+
+  describe('undo', () => {
+    it('undoes cell change action', () => {
+      board.actions.push({
+        cellIndex: 4,
+        from: 5,
+        to: 6,
+        type: ActionType.CELL_CHANGE,
+      });
+
+      undo(board);
+
+      expect(board.cells[4].value).toEqual(5);
+      expect(board.actions).toEqual([]);
+      expect(board.cells[5].options).toEqual(new Set([1, 2, 3, 4, 6, 7, 8, 9]));
+    });
+
+    it('undoes color change action', () => {
+      board.actions.push({
+        cellIndex: null,
+        from: 2,
+        to: 3,
+        type: ActionType.COLOR_CHANGE,
+      });
+
+      undo(board);
+
+      expect(board.currentColor).toEqual(2);
+      expect(board.actions).toEqual([]);
+    });
+
+    it('performs no action if there are no action on the board', () => {
+      undo(board);
+
+      expect(board.actions).toEqual([]);
+    });
+  });
+
+  describe('undoColor', () => {
+    it('undoes all actions of the current color', () => {
+      board.actions.push({
+        type: ActionType.CELL_CHANGE,
+        cellIndex: 3,
+        from: 8,
+        to: 9,
+      });
+      board.actions.push({
+        type: ActionType.COLOR_CHANGE,
+        from: 1,
+        to: 2,
+        cellIndex: null,
+      });
+      board.actions.push({
+        type: ActionType.CELL_CHANGE,
+        cellIndex: 1,
+        from: 2,
+        to: 3,
+      });
+      board.actions.push({
+        type: ActionType.CELL_CHANGE,
+        cellIndex: 2,
+        from: 5,
+        to: 6,
+      });
+
+      undoColor(board);
+
+      expect(board.actions).toEqual([
+        {
+          type: ActionType.CELL_CHANGE,
+          cellIndex: 3,
+          from: 8,
+          to: 9,
+        },
+      ]);
+      expect(board.currentColor).toEqual(1);
+      expect(board.cells[1].value).toEqual(2);
+      expect(board.cells[2].value).toEqual(5);
+      expect(board.cells[3].value).toBeNull();
+      expect(board.cells[3].options).toEqual(new Set([1, 3, 4, 6, 7, 8, 9]));
     });
   });
 });

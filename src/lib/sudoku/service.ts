@@ -1,4 +1,4 @@
-import type { Board } from './models';
+import { Action, ActionType, Board } from './models';
 
 const COLOR_LIMIT = 5;
 
@@ -71,5 +71,66 @@ export const analyzeBoard = (board: Board) => {
 };
 
 export const changeColor = (board: Board) => {
-  board.currentColor = (board.currentColor + 1) % COLOR_LIMIT;
+  const newColor = (board.currentColor + 1) % COLOR_LIMIT;
+
+  board.actions.push({
+    cellIndex: null,
+    from: board.currentColor,
+    to: newColor,
+    type: ActionType.COLOR_CHANGE,
+  });
+  board.currentColor = newColor;
+};
+
+export const setCellValue = (
+  board: Board,
+  cellIndex: number,
+  value: number | null
+) => {
+  board.cells[cellIndex].value = value;
+  board.cells[cellIndex].color = board.currentColor;
+
+  analyzeBoard(board);
+};
+
+const undoAction = (board: Board, action: Action) => {
+  let analyze = false;
+
+  switch (action.type) {
+    case ActionType.COLOR_CHANGE:
+      board.currentColor = action.from as number;
+      break;
+    case ActionType.CELL_CHANGE:
+      board.cells[action.cellIndex as number].value = action.from as
+        | number
+        | null;
+      analyze = true;
+      break;
+  }
+
+  return analyze;
+};
+
+export const undo = (board: Board) => {
+  const action = board.actions.pop();
+  if (action && undoAction(board, action)) {
+    analyzeBoard(board);
+  }
+};
+
+export const undoColor = (board: Board) => {
+  let analyze = false;
+
+  while (board.actions.length > 0) {
+    const action = board.actions.pop() as Action;
+    analyze = undoAction(board, action) || analyze;
+
+    if (action.type === ActionType.COLOR_CHANGE) {
+      break;
+    }
+  }
+
+  if (analyze) {
+    analyzeBoard(board);
+  }
 };
