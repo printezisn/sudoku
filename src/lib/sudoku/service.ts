@@ -120,7 +120,7 @@ const undoAction = (board: Board, action: Action) => {
   return analyze;
 };
 
-export const undo = (board: Board) => {
+export const undoSingle = (board: Board) => {
   const action = board.actions.pop();
   if (action && undoAction(board, action)) {
     analyzeBoard(board);

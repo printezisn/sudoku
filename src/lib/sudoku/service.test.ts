@@ -5,7 +5,7 @@ import {
   cloneBoard,
   createBoard,
   setCellValue,
-  undo,
+  undoSingle,
   undoColor,
 } from './service';
 import { ActionType, Board } from './models';
@@ -196,7 +196,7 @@ describe('sudoku service', () => {
     });
   });
 
-  describe('undo', () => {
+  describe('undoSingle', () => {
     it('undoes cell change action', () => {
       board.actions.push({
         cellIndex: 4,
@@ -205,7 +205,7 @@ describe('sudoku service', () => {
         type: ActionType.CELL_CHANGE,
       });
 
-      undo(board);
+      undoSingle(board);
 
       expect(board.cells[4].value).toEqual(5);
       expect(board.actions).toEqual([]);
@@ -220,14 +220,14 @@ describe('sudoku service', () => {
         type: ActionType.COLOR_CHANGE,
       });
 
-      undo(board);
+      undoSingle(board);
 
       expect(board.currentColor).toEqual(2);
       expect(board.actions).toEqual([]);
     });
 
     it('performs no action if there are no action on the board', () => {
-      undo(board);
+      undoSingle(board);
 
       expect(board.actions).toEqual([]);
     });
