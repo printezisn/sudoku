@@ -17,6 +17,15 @@ export const createBoard = (): Board => ({
   currentColor: 0,
 });
 
+export const cloneBoard = (board: Board): Board => ({
+  ...board,
+  actions: board.actions.map((action) => ({ ...action })),
+  cells: board.cells.map((cell) => ({
+    ...cell,
+    options: new Set(cell.options),
+  })),
+});
+
 export const analyzeBoard = (board: Board) => {
   const valuesPerRow = Array(9)
     .fill(null)

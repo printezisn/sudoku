@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
   analyzeBoard,
   changeColor,
+  cloneBoard,
   createBoard,
   setCellValue,
   undo,
@@ -32,6 +33,19 @@ describe('sudoku service', () => {
           options: new Set(),
         })
       );
+    });
+  });
+
+  describe('cloneBoard', () => {
+    it('returns a cloned version of the board', () => {
+      for (let i = 0; i < board.cells.length; i++) {
+        board.cells[i].value = Math.floor(Math.random() * 9) + 1;
+      }
+
+      analyzeBoard(board);
+      const clone = cloneBoard(board);
+
+      expect(clone).toEqual(board);
     });
   });
 
