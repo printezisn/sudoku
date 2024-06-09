@@ -24,3 +24,10 @@ export interface Board {
   currentColor: number;
   actions: Action[];
 }
+
+export enum Difficulty {
+  EASY,
+  NORMAL,
+  HARD,
+  EMPTY,
+}

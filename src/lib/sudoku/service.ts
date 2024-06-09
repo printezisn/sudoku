@@ -1,22 +1,14 @@
 import { shuffle } from '../helpers/array-helpers';
-import { Action, ActionType, Board } from './models';
+import { Action, ActionType, Board, Difficulty } from './models';
 
 const COLOR_LIMIT = 5;
 
-export const createBoard = (): Board => ({
-  cells: Array(81)
-    .fill(null)
-    .map(() => ({
-      value: null,
-      color: 0,
-      hasError: false,
-      initial: false,
-      options: new Set(),
-    })),
-  finished: false,
-  actions: [],
-  currentColor: 0,
-});
+const VISIBLE_CELLS_PER_DIFFICULTY = {
+  [Difficulty.EASY]: 40,
+  [Difficulty.NORMAL]: 35,
+  [Difficulty.HARD]: 30,
+  [Difficulty.EMPTY]: 0,
+};
 
 export const cloneBoard = (board: Board): Board => ({
   ...board,
@@ -211,4 +203,43 @@ export const solveBoard = (board: Board): Board | null => {
   }
 
   return null;
+};
+
+export const createBoard = (difficulty: Difficulty): Board => {
+  const board: Board = {
+    cells: Array(81)
+      .fill(null)
+      .map(() => ({
+        value: null,
+        color: 0,
+        hasError: false,
+        initial: false,
+        options: new Set(),
+      })),
+    finished: false,
+    actions: [],
+    currentColor: 0,
+  };
+
+  analyzeBoard(board);
+
+  if (VISIBLE_CELLS_PER_DIFFICULTY[difficulty] === 0) {
+    return board;
+  }
+
+  const solvedBoard = solveBoard(board) as Board;
+  const shuffledCells = shuffle(solvedBoard.cells);
+
+  for (let i = 0; i < shuffledCells.length; i++) {
+    if (i < VISIBLE_CELLS_PER_DIFFICULTY[difficulty]) {
+      shuffledCells[i].initial = true;
+      shuffledCells[i].color = solvedBoard.currentColor;
+    } else {
+      shuffledCells[i].value = null;
+    }
+  }
+
+  analyzeBoard(solvedBoard);
+
+  return solvedBoard;
 };

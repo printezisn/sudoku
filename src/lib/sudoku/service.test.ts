@@ -9,32 +9,13 @@ import {
   undoColor,
   solveBoard,
 } from './service';
-import { ActionType, Board } from './models';
+import { ActionType, Board, Difficulty } from './models';
 
 describe('sudoku service', () => {
   let board: Board;
 
   beforeEach(() => {
-    board = createBoard();
-  });
-
-  describe('createBoard', () => {
-    it('creates a new board', () => {
-      expect(board).toMatchObject({
-        finished: false,
-        currentColor: 0,
-        actions: [],
-      });
-      board.cells.forEach((cell) =>
-        expect(cell).toMatchObject({
-          value: null,
-          color: 0,
-          hasError: false,
-          initial: false,
-          options: new Set(),
-        })
-      );
-    });
+    board = createBoard(Difficulty.EMPTY);
   });
 
   describe('cloneBoard', () => {
@@ -303,6 +284,59 @@ describe('sudoku service', () => {
       const solution = solveBoard(board);
 
       expect(solution).toBeNull();
+    });
+  });
+
+  describe('createBoard', () => {
+    const testForCorrectBoard = (
+      difficulty: Difficulty,
+      expectedVisibleCells: number
+    ) => {
+      let totalVisibleCells = 0;
+      board = createBoard(difficulty);
+
+      expect(board).toMatchObject({
+        finished: false,
+        currentColor: 0,
+        actions: [],
+      });
+      board.cells.forEach((cell) => {
+        if (cell.value == null) {
+          expect(cell).toMatchObject({
+            value: null,
+            color: 0,
+            hasError: false,
+            initial: false,
+          });
+        } else {
+          totalVisibleCells++;
+          expect(cell).toMatchObject({
+            color: 0,
+            hasError: false,
+            initial: true,
+          });
+        }
+
+        expect(cell.options.size > 0).toBeTruthy();
+      });
+
+      expect(totalVisibleCells).toEqual(expectedVisibleCells);
+    };
+
+    it('creates a new board for empty difficulty if requested', () => {
+      testForCorrectBoard(Difficulty.EMPTY, 0);
+    });
+
+    it('creates a new board for easy difficulty if requested', () => {
+      testForCorrectBoard(Difficulty.EASY, 40);
+    });
+
+    it('creates a new board for normal difficulty if requested', () => {
+      testForCorrectBoard(Difficulty.NORMAL, 35);
+    });
+
+    it('creates a new board for hard difficulty if requested', () => {
+      testForCorrectBoard(Difficulty.HARD, 30);
     });
   });
 });
