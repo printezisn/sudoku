@@ -291,5 +291,18 @@ describe('sudoku service', () => {
         expect(cell.hasError).toBeFalsy();
       });
     });
+
+    it('returns null if the board cannot be solved', () => {
+      board.cells[0].value = 2;
+      board.cells[17].value = 2;
+      board.cells[30].value = 2;
+      board.cells[58].value = 2;
+      board.cells[23].value = 3;
+
+      analyzeBoard(board);
+      const solution = solveBoard(board);
+
+      expect(solution).toBeNull();
+    });
   });
 });
