@@ -7,6 +7,7 @@ import {
   setCellValue,
   undoSingle,
   undoColor,
+  solveBoard,
 } from './service';
 import { ActionType, Board } from './models';
 
@@ -275,6 +276,20 @@ describe('sudoku service', () => {
       expect(board.cells[2].value).toEqual(5);
       expect(board.cells[3].value).toBeNull();
       expect(board.cells[3].options).toEqual(new Set([1, 3, 4, 6, 7, 8, 9]));
+    });
+  });
+
+  describe('solveBoard', () => {
+    it('returns the solution if the board can be solved', () => {
+      analyzeBoard(board);
+      const solution = solveBoard(board);
+
+      expect(solution).not.toBeNull();
+      expect(solution?.finished).toBeTruthy();
+      solution?.cells.forEach((cell) => {
+        expect(cell.value).not.toBeNull();
+        expect(cell.hasError).toBeFalsy();
+      });
     });
   });
 });

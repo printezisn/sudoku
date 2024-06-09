@@ -1,3 +1,4 @@
+import { shuffle } from '../helpers/array-helpers';
 import { Action, ActionType, Board } from './models';
 
 const COLOR_LIMIT = 5;
@@ -142,4 +143,72 @@ export const undoColor = (board: Board) => {
   if (analyze) {
     analyzeBoard(board);
   }
+};
+
+export const solveBoard = (board: Board): Board | null => {
+  let index = -1;
+
+  for (let i = 0; i < board.cells.length; i++) {
+    const cell = board.cells[i];
+    if (cell.value != null) continue;
+
+    if (index === -1 || cell.options.size < board.cells[index].options.size) {
+      index = i;
+    }
+  }
+
+  if (index === -1) {
+    analyzeBoard(board);
+    return board;
+  }
+
+  const options = shuffle(Array.from(board.cells[index].options));
+
+  for (let i = 0; i < options.length; i++) {
+    const rowStart = Math.floor(index / 9) * 9;
+    const col = index % 9;
+    const groupStart = Math.floor(index / 27) * 27 + Math.floor(col / 3) * 3;
+    const clone = cloneBoard(board);
+    let valid = true;
+
+    clone.cells[index].value = options[i];
+    clone.cells[index].color = clone.currentColor;
+
+    for (let j = col; j < 81 + col && valid; j += 9) {
+      if (j === index) continue;
+
+      clone.cells[j].options.delete(options[i]);
+      if (clone.cells[j].options.size === 0) {
+        valid = false;
+      }
+    }
+
+    for (let j = rowStart; j < rowStart + 9 && valid; j++) {
+      if (j === index) continue;
+
+      clone.cells[j].options.delete(options[i]);
+      if (clone.cells[j].options.size === 0) {
+        valid = false;
+      }
+    }
+
+    for (let k = groupStart; k < 27 + groupStart && valid; k += 9) {
+      for (let j = k; j < k + 3; j++) {
+        if (j === index) continue;
+
+        clone.cells[j].options.delete(options[i]);
+        if (clone.cells[j].options.size === 0) {
+          valid = false;
+          break;
+        }
+      }
+    }
+
+    if (!valid) continue;
+
+    const result = solveBoard(clone);
+    if (result) return result;
+  }
+
+  return null;
 };
