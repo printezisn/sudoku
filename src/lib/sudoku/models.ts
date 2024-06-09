@@ -31,3 +31,14 @@ export enum Difficulty {
   HARD,
   EMPTY,
 }
+
+export enum WorkerMessageType {
+  CREATE_NEW,
+  SOLVE,
+}
+
+export interface WorkerMessage {
+  type: WorkerMessageType;
+  board?: Board;
+  difficulty?: Difficulty;
+}
