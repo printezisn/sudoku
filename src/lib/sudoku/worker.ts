@@ -5,19 +5,21 @@ self.onmessage = (e) => {
   const message = e.data as WorkerMessage;
 
   switch (message.type) {
-    case WorkerMessageType.CREATE_NEW:
-      const newBoard = createBoard(message.difficulty as Difficulty);
+    case WorkerMessageType.CREATE_NEW: {
+      const board = createBoard(message.difficulty as Difficulty);
       postMessage({
         ...message,
-        board: newBoard,
+        board,
       } as WorkerMessage);
       break;
-    case WorkerMessageType.SOLVE:
-      const solvedBoard = solveBoard(message.board as Board);
+    }
+    case WorkerMessageType.SOLVE: {
+      const board = solveBoard(message.board as Board);
       postMessage({
         ...message,
-        board: solvedBoard,
+        board,
       } as WorkerMessage);
       break;
+    }
   }
 };
