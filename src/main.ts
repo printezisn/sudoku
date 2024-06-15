@@ -1,3 +1,3 @@
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js');
+  navigator.serviceWorker.register('/sudoku/service-worker.js');
 }

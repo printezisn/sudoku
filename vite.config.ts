@@ -7,4 +7,5 @@ export default defineConfig({
     clearMocks: true,
     environment: 'jsdom',
   },
+  base: '/sudoku',
 });
