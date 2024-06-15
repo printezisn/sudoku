@@ -1,0 +1,24 @@
+@use "variables";
+@use "reset";
+@use "container";
+
+:root {
+  @each $name, $value in variables.$tokens {
+    --#{$name}: #{$value};
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-family-text);
+}
+
+html,
+body {
+  background-color: var(--color-primary-grey-lightest);
+  color: var(--color-primary-black);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-text);
+}

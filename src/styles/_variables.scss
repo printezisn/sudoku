@@ -1,0 +1,151 @@
+@use "sass:map";
+
+$color-saturation: 78%;
+$color-lightness: 38%;
+$color-white-lightness: 99%;
+$color-black-lightness: 5%;
+
+$color-primary-hue: 199;
+
+$font-size-base: 16px;
+$line-height-base: 1.5rem;
+$total-font-sizes: 6;
+$total-spacings: 6;
+
+@function createColors($name, $hue, $text-lightness) {
+  @return (
+    "#{$name}": hsl($hue, $color-saturation, $color-lightness),
+    "#{$name}-overlay": hsla($hue, $color-saturation, $color-black-lightness, 50%),
+    "#{$name}-text": hsl($hue, $color-saturation, $text-lightness),
+    "#{$name}-black": hsl($hue, $color-saturation, $color-black-lightness),
+    "#{$name}-white": hsl($hue, $color-saturation, $color-white-lightness),
+    "#{$name}-grey-darkest": hsl($hue, 0%, 10%),
+    "#{$name}-grey-darker": hsl($hue, 0%, 25%),
+    "#{$name}-grey-dark": hsl($hue, 0%, 40%),
+    "#{$name}-grey": hsl($hue, 0%, 50%),
+    "#{$name}-grey-light": hsl($hue, 0%, 60%),
+    "#{$name}-grey-lighter": hsl($hue, 0%, 75%),
+    "#{$name}-grey-lightest": hsl($hue, 0%, 85%),
+  );
+}
+
+@function createFontSizes($total, $base) {  
+  $m: (
+    "base": $base,
+  );
+
+  @for $i from 1 through $total {
+    $m: map.set($m, $i, #{0.5 + 0.25 * $i}rem);
+  }
+
+  @return $m;
+}
+
+@function createLineHeights($total, $base) {  
+  $m: (
+    "base": $base,
+  );
+
+  @for $i from 1 through $total {
+    $m: map.set($m, $i, #{0.75 + 0.375 * $i}rem);
+  }
+
+  @return $m;
+}
+
+@function createSpacings($total) {
+  $m: ();
+
+  @for $i from 1 through $total {
+    $m: map.set($m, $i, #{$i * 0.25}rem);
+  }
+
+  @return $m;
+}
+
+@function mergeMaps($maps, $appendMapName: 1) {
+  $m: ();
+
+  @each $mapName, $map in $maps {
+    @each $name, $value in $map {
+      $entry: $name;
+
+      @if ($appendMapName == 1) {
+        $entry: "#{$mapName}-#{$name}";
+      }
+
+      $m: map.set($m, $entry, $value);
+    }
+  }
+
+  @return $m;
+}
+
+$colors: mergeMaps(
+  (
+    "primary": createColors("primary", $color-primary-hue, $color-black-lightness),
+    "sudoku": (
+      "light": hsl(51, $color-saturation, $color-lightness),
+      "dark": hsl(199, $color-saturation, $color-lightness),
+      "sudoku-1": hsl(199, $color-saturation, $color-lightness),
+      "sudoku-2": hsl(32, $color-saturation, $color-lightness),
+      "sudoku-3": hsl(51, $color-saturation, $color-lightness),
+      "sudoku-4": hsl(7, $color-saturation, $color-lightness),
+      "sudoku-5": hsl(281, $color-saturation, $color-lightness),
+    )
+  ),
+  0
+);
+
+$font-families: (
+  "text": 'Helvetica, sans-serif',
+  "header": 'Helvetica, sans-serif'
+);
+
+$font-weights: (
+  "normal": 400,
+  "bold": 600
+);
+
+$font-sizes: createFontSizes($total-font-sizes, $font-size-base);
+$line-heights: createLineHeights($total-font-sizes, $line-height-base);
+
+$screen-sizes: (
+  "tablet": 768,
+  "small-desktop": 1024,
+  "regular-desktop": 1280,
+  "large-desktop": 1920
+);
+
+$transition-times: (
+  "quick": .3s,
+  "normal": .5s,
+  "slow": 1s,
+  "slower": 4s,
+  "slowest": 7s,
+);
+
+$border-radius: (
+  "normal": 4px,
+  "large": 8px,
+  "larger": 16px
+);
+
+$z-index: (
+  "max": 100
+);
+
+$spacings: createSpacings($total-spacings);
+
+$tokens: mergeMaps((
+  "color": $colors,
+  "font-family": $font-families,
+  "font-weight": $font-weights,
+  "font-size": $font-sizes,
+  "line-height": $line-heights,
+  "screen-size": $screen-sizes,
+  "transition-time": $transition-times,
+  "border-radius": $border-radius,
+  "spacing": $spacings,
+  "z-index": $z-index
+));
