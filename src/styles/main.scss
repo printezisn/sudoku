@@ -1,6 +1,6 @@
 @use "variables";
 @use "reset";
-@use "container";
+@use "components";
 
 :root {
   @each $name, $value in variables.$tokens {
@@ -8,17 +8,41 @@
   }
 }
 
+:root:has(.theme-switch[aria-checked="true"]) {
+  --color-body: var(--color-primary-grey-darkest);
+  --color-body-text: var(--color-primary-grey-lightest);
+}
+
 * {
   box-sizing: border-box;
   font-family: var(--font-family-text);
+  transition: background-color var(--transition-time-quick), color var(--transition-time-quick);
 }
 
 html,
 body {
-  background-color: var(--color-primary-grey-lightest);
-  color: var(--color-primary-black);
+  background-color: var(--color-body);
+  color: var(--color-body-text);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   font-weight: var(--font-weight-normal);
   font-family: var(--font-family-text);
+  padding-block-start: var(--spacing-4);
+}
+
+.sr-only {
+  white-space: nowrap;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border-width: 0;
+  clip-path: rect(0, 0, 0, 0);
+  position: absolute;
+  overflow: hidden;
+}
+
+.align-right {
+  display: flex;
+  justify-content: flex-end;
 }

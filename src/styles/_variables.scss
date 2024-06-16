@@ -85,13 +85,17 @@ $colors: mergeMaps(
   (
     "primary": createColors("primary", $color-primary-hue, $color-black-lightness),
     "sudoku": (
-      "light": hsl(51, $color-saturation, $color-lightness),
-      "dark": hsl(199, $color-saturation, $color-lightness),
       "sudoku-1": hsl(199, $color-saturation, $color-lightness),
       "sudoku-2": hsl(32, $color-saturation, $color-lightness),
       "sudoku-3": hsl(51, $color-saturation, $color-lightness),
       "sudoku-4": hsl(7, $color-saturation, $color-lightness),
       "sudoku-5": hsl(281, $color-saturation, $color-lightness),
+    ),
+    "other": (
+      "light": hsl(51, $color-saturation, $color-lightness),
+      "dark": hsl(199, $color-saturation, $color-lightness),
+      "body": "var(--color-primary-grey-lightest)",
+      "body-text": "var(--color-primary-black)"
     )
   ),
   0
