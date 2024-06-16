@@ -1,6 +1,7 @@
 import initThemeSwitch from './components/theme-switch';
 import './styles/main.scss';
 
+// Initialize components
 initThemeSwitch();
 
 // Remove curtain

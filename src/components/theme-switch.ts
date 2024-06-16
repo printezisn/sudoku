@@ -1,7 +1,7 @@
 const initThemeSwitch = () => {
-  const themeSwitch = document.querySelector(
-    '.theme-switch'
-  ) as HTMLButtonElement;
+  const themeSwitch = document.getElementsByClassName(
+    'theme-switch'
+  )[0] as HTMLButtonElement;
 
   let theme = localStorage.getItem('theme');
   if (!theme) {
