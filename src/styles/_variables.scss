@@ -6,6 +6,9 @@ $color-white-lightness: 99%;
 $color-black-lightness: 5%;
 
 $color-primary-hue: 199;
+$color-warning-hue: 51;
+$color-error-hue: 7;
+$color-purple-hue: 281;
 
 $font-size-base: 16px;
 $line-height-base: 1.5rem;
@@ -85,15 +88,16 @@ $colors: mergeMaps(
   (
     "primary": createColors("primary", $color-primary-hue, $color-black-lightness),
     "sudoku": (
-      "sudoku-1": hsl(199, $color-saturation, $color-lightness),
-      "sudoku-2": hsl(32, $color-saturation, $color-lightness),
-      "sudoku-3": hsl(51, $color-saturation, $color-lightness),
-      "sudoku-4": hsl(7, $color-saturation, $color-lightness),
-      "sudoku-5": hsl(281, $color-saturation, $color-lightness),
+      "sudoku-1": "var(--color-primary-black)",
+      "sudoku-2": "var(--color-primary)",
+      "sudoku-3": "var(--color-warning)",
+      "sudoku-4": "var(--color-error)",
+      "sudoku-5": "var(--color-purple)",
     ),
     "other": (
-      "light": hsl(51, $color-saturation, $color-lightness),
-      "dark": hsl(199, $color-saturation, $color-lightness),
+      "warning": hsl($color-warning-hue, $color-saturation, $color-lightness),
+      "error": hsl($color-error-hue, $color-saturation, $color-lightness),
+      "purple": hsl($color-purple-hue, $color-saturation, $color-lightness),  
       "body": "var(--color-primary-grey-lightest)",
       "body-text": "var(--color-primary-black)"
     )

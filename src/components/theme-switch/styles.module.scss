@@ -13,6 +13,7 @@
   position: relative;
   inline-size: calc(var(--item-inline-size) * 2 + var(--switch-padding) * 2 + var(--switch-border-width) * 2);
   block-size: calc(var(--item-inline-size) + var(--switch-padding) * 2 + var(--switch-border-width) * 2);
+  outline-color: var(--color-primary);
 
   & > * {
     background-color: var(--item-color);
@@ -28,12 +29,12 @@
 
   & > :nth-child(1) {
     visibility: visible;
-    color: var(--color-light);
+    color: var(--color-warning);
   }
 
   & > :nth-child(2) {
     visibility: hidden;
-    color: var(--color-dark);
+    color: var(--color-primary);
   }
 
   &[aria-checked="true"] {
