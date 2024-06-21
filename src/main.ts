@@ -6,8 +6,8 @@ initThemeSwitch();
 
 // Remove curtain
 setTimeout(() => {
-  document.body.style.opacity = '';
-}, 500);
+  document.body.classList.remove('curtain');
+}, 0);
 
 // Register service worker
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {

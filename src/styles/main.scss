@@ -42,6 +42,14 @@ body {
   overflow: hidden;
 }
 
+.curtain {
+  opacity: 0 !important;
+
+  * {
+    transition: none !important;
+  }
+}
+
 .align-right {
   display: flex;
   justify-content: flex-end;
