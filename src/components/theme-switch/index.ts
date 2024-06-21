@@ -1,4 +1,13 @@
 import template from './template.html?raw';
+import styles from './styles.module.scss';
+import { addModuleStyles } from '../../lib/helpers/style-helpers';
+import SunIcon from '../../icons/sun.svg?raw';
+import MoonIcon from '../../icons/moon.svg?raw';
+
+const componentTemplate = addModuleStyles(
+  template.replace('{sun}', SunIcon).replace('{moon}', MoonIcon),
+  styles
+);
 
 class ThemeSwitch extends HTMLElement {
   private switch: HTMLButtonElement | null = null;
@@ -20,10 +29,10 @@ class ThemeSwitch extends HTMLElement {
   };
 
   connectedCallback() {
-    this.innerHTML = template;
+    this.innerHTML = componentTemplate;
 
     this.switch = document.getElementsByClassName(
-      'theme-switch'
+      styles.themeSwitch
     )[0] as HTMLButtonElement;
 
     let theme = localStorage.getItem('theme');

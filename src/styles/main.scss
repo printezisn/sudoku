@@ -1,6 +1,6 @@
 @use "variables";
 @use "reset";
-@use "components";
+@use "container";
 
 :root {
   @each $name, $value in variables.$tokens {

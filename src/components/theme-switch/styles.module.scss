@@ -1,4 +1,4 @@
-[role="switch"] {
+.themeSwitch {
   --item-inline-size: 24px;
   --switch-padding: 2px;
   --switch-border-width: 1px;
@@ -28,17 +28,11 @@
 
   & > :nth-child(1) {
     visibility: visible;
+    color: var(--color-light);
   }
 
   & > :nth-child(2) {
     visibility: hidden;
-  }
-
-  & > .light {
-    color: var(--color-light);
-  }
-
-  & > .dark {
     color: var(--color-dark);
   }
 
@@ -57,8 +51,8 @@
   }
 }
 
-:root[data-theme="dark"] {
-  [role="switch"] {
+[data-theme="dark"] {
+  .themeSwitch {
     --bg-color: var(--color-primary-grey-dark);
     --border-color: var(--color-primary-grey-darker);
     --item-color: var(--color-primary-grey-lightest);
