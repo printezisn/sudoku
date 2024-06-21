@@ -6,11 +6,11 @@
   @each $name, $value in variables.$tokens {
     --#{$name}: #{$value};
   }
-}
 
-:root:has(.theme-switch[aria-checked="true"]) {
-  --color-body: var(--color-primary-grey-darkest);
-  --color-body-text: var(--color-primary-grey-lightest);
+  &[data-theme="dark"] {
+    --color-body: var(--color-primary-grey-darkest);
+    --color-body-text: var(--color-primary-grey-lightest);
+  }
 }
 
 * {

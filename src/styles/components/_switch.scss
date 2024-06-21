@@ -57,7 +57,7 @@
   }
 }
 
-:root:has(.theme-switch[aria-checked="true"]) {
+:root[data-theme="dark"] {
   [role="switch"] {
     --bg-color: var(--color-primary-grey-dark);
     --border-color: var(--color-primary-grey-darker);
