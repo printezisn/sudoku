@@ -1,8 +1,8 @@
-import initThemeSwitch from './components/theme-switch';
+import ThemeSwitch from './components/theme-switch';
 import './styles/main.scss';
 
 // Initialize components
-initThemeSwitch();
+customElements.define('app-theme-switch', ThemeSwitch);
 
 // Remove curtain
 setTimeout(() => {
