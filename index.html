@@ -31,10 +31,48 @@
     <div class="container-inner">
       <header>
         <h1 class="sr-only">Sudoku</h1>
-        <div class="align-right">
+        <div class="align-right block">
           <app-theme-switch />
         </div>
       </header>
+      <main>
+        <ul role="menu" aria-label="Actions" class="block">
+          <li role="presentation">
+            <app-action-button menu="new-game-menu">New</app-action-button>
+            <ul id="new-game-menu" role="menu" aria-label="New game options">
+              <li role="presentation">
+                <app-action-button action="newGameEasy">Easy</app-action-button>
+              </li>
+              <li role="presentation">
+                <app-action-button action="newGameNormal">Normal</app-action-button>
+              </li>
+              <li role="presentation">
+                <app-action-button action="newGameHard">Hard</app-action-button>
+              </li>
+              <li role="presentation">
+                <app-action-button action="newGameEmpty">Empty</app-action-button>
+              </li>
+            </ul>
+          </li>
+          <li role="presentation">
+            <app-action-button menu="undo-menu">Undo</app-action-button>
+            <ul id="undo-menu" role="menu" aria-label="Undo options">
+              <li role="presentation">
+                <app-action-button action="undoOne">Undo One Move</app-action-button>
+              </li>
+              <li role="presentation">
+                <app-action-button action="undoColor">Undo Color</app-action-button>
+              </li>
+            </ul>
+          </li>
+          <li role="presentation">
+            <app-action-button action="solve">Solve</app-action-button>
+          </li>
+          <li role="presentation">
+            <app-action-button action="changeColor">Change Color</app-action-button>
+          </li>
+        </ul>
+      </main>
     </div>
   </body>
 </html>

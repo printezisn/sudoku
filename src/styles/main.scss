@@ -1,6 +1,8 @@
 @use "variables";
 @use "reset";
 @use "container";
+@use "button";
+@use "menu";
 
 :root {
   @each $name, $value in variables.$tokens {
@@ -10,6 +12,13 @@
   &[data-theme="dark"] {
     --color-body: var(--color-primary-grey-darkest);
     --color-body-text: var(--color-primary-grey-lightest);
+    --color-content: var(--color-primary-grey-darker);
+    --color-content-text: var(--color-primary-grey-lighter);
+    --color-content-border: var(--color-primary-grey-dark);
+    --color-content-hover: var(--color-primary-grey-dark);
+    --color-content-hover-text: var(--color-primary-white);
+    --color-content-hover-border: var(--color-primary-grey-dark);
+    --color-content-shadow: var(--color-primary-white-shadow);
   }
 }
 
@@ -27,7 +36,6 @@ body {
   line-height: var(--line-height-base);
   font-weight: var(--font-weight-normal);
   font-family: var(--font-family-text);
-  padding-block-start: var(--spacing-4);
 }
 
 .sr-only {
@@ -53,4 +61,8 @@ body {
 .align-right {
   display: flex;
   justify-content: flex-end;
+}
+
+.block {
+  padding-block-start: var(--spacing-4);
 }

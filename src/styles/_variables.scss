@@ -18,10 +18,11 @@ $total-spacings: 6;
 @function createColors($name, $hue, $text-lightness) {
   @return (
     "#{$name}": hsl($hue, $color-saturation, $color-lightness),
-    "#{$name}-overlay": hsla($hue, $color-saturation, $color-black-lightness, 50%),
     "#{$name}-text": hsl($hue, $color-saturation, $text-lightness),
     "#{$name}-black": hsl($hue, $color-saturation, $color-black-lightness),
+    "#{$name}-black-shadow": hsla($hue, $color-saturation, $color-black-lightness, 10%),
     "#{$name}-white": hsl($hue, $color-saturation, $color-white-lightness),
+    "#{$name}-white-shadow": hsla($hue, $color-saturation, $color-white-lightness, 10%),
     "#{$name}-grey-darkest": hsl($hue, 0%, 10%),
     "#{$name}-grey-darker": hsl($hue, 0%, 25%),
     "#{$name}-grey-dark": hsl($hue, 0%, 40%),
@@ -99,7 +100,14 @@ $colors: mergeMaps(
       "error": hsl($color-error-hue, $color-saturation, $color-lightness),
       "purple": hsl($color-purple-hue, $color-saturation, $color-lightness),  
       "body": "var(--color-primary-grey-lightest)",
-      "body-text": "var(--color-primary-black)"
+      "body-text": "var(--color-primary-black)",
+      "content": "var(--color-primary-white)",
+      "content-text": "var(--color-primary-black)",
+      "content-border": "var(--color-primary-grey-lighter)",
+      "content-hover": "var(--color-primary-grey-lightest)",
+      "content-hover-text": "var(--color-primary-black)",
+      "content-hover-border": "var(--color-primary-grey-light)",
+      "content-shadow": "var(--color-primary-black-shadow)"
     )
   ),
   0

@@ -1,8 +1,10 @@
+import ActionButton from './components/action-button';
 import ThemeSwitch from './components/theme-switch';
 import './styles/main.scss';
 
 // Initialize components
 customElements.define('app-theme-switch', ThemeSwitch);
+customElements.define('app-action-button', ActionButton);
 
 // Remove curtain
 setTimeout(() => {
