@@ -2,8 +2,11 @@ class ActionButton extends HTMLElement {
   private menu: string | null = null;
   private action: string | null = null;
   private button: HTMLButtonElement | null = null;
+  private hasClickedButton = false;
 
-  private onClick = () => {
+  private onButtonClick = () => {
+    this.hasClickedButton = true;
+
     if (this.menu && this.button) {
       this.button.ariaExpanded =
         this.button.ariaExpanded === 'true' ? 'false' : 'true';
@@ -11,6 +14,14 @@ class ActionButton extends HTMLElement {
     if (this.action) {
       //TODO
       console.log(this.action);
+    }
+  };
+
+  private onDocumentClick = () => {
+    if (this.hasClickedButton) {
+      this.hasClickedButton = false;
+    } else if (this.button) {
+      this.button.ariaExpanded = 'false';
     }
   };
 
@@ -28,14 +39,20 @@ class ActionButton extends HTMLElement {
       this.button.ariaExpanded = 'false';
     }
 
-    this.button.addEventListener('click', this.onClick);
+    this.button.addEventListener('click', this.onButtonClick);
+    if (this.menu) {
+      document.addEventListener('click', this.onDocumentClick);
+    }
     this.button.innerHTML = this.innerHTML;
 
     this.replaceChildren(this.button);
   }
 
   disconnectedCallback() {
-    this.button?.removeEventListener('click', this.onClick);
+    this.button?.removeEventListener('click', this.onButtonClick);
+    if (this.menu) {
+      document.removeEventListener('click', this.onDocumentClick);
+    }
   }
 }
 

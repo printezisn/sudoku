@@ -8,8 +8,10 @@ describe('ActionButton', () => {
     let button: HTMLButtonElement;
 
     beforeEach(() => {
-      document.body.innerHTML =
-        '<app-action-button menu="mymenu" action="run">Press</app-action-button>';
+      document.body.innerHTML = `
+        <app-action-button menu="mymenu" action="run">Press</app-action-button>
+        <span></span>
+      `;
 
       button = document.querySelector('button') as HTMLButtonElement;
     });
@@ -26,6 +28,14 @@ describe('ActionButton', () => {
       button.click();
 
       expect(button.getAttribute('aria-expanded')).toEqual('true');
+    });
+
+    it('sets aria-expanded as false if the user clicks anywhere else', () => {
+      button.click();
+      expect(button.getAttribute('aria-expanded')).toEqual('true');
+
+      document.querySelector('span')?.click();
+      expect(button.getAttribute('aria-expanded')).toEqual('false');
     });
   });
 
