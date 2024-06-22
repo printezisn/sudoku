@@ -9,6 +9,7 @@ button:not([role="switch"]) {
   line-height: var(--line-height-2);
   cursor: pointer;
   outline-color: var(--color-primary);
+  white-space: nowrap;
 
   &:hover {
     background: var(--color-content-hover);
@@ -43,6 +44,12 @@ button:not([role="switch"]) {
     border-end-start-radius: 0;
     border-end-end-radius: 0;
     padding-block-end: var(--spacing-3);
+
+    &:hover {
+      background: var(--color-content);
+      color: var(--color-content-text);
+      border-color: var(--color-content-border);
+    }
 
     &::after {
       clip-path: polygon(0% 100%, 50% 0%, 100% 100%);

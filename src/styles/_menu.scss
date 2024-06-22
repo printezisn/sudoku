@@ -1,9 +1,11 @@
 [role="menu"] {
   display: flex;
   gap: var(--spacing-2);
+  flex-wrap: wrap;
 
   li {
     position: relative;
+    block-size: fit-content;
   }
 
   [role="menu"] {
@@ -17,7 +19,6 @@
     border-radius: var(--border-radius-large);
     border-start-start-radius: 0;
     padding-block: var(--border-radius-large);
-    white-space: nowrap;
     gap: 0;
     box-shadow: 0 1px 1px var(--color-content-shadow);
     min-inline-size: 150px;
