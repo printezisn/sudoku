@@ -26,6 +26,7 @@ button:not([role="switch"]) {
   &[aria-expanded] {
     display: flex;
     gap: var(--spacing-1);
+    flex-wrap: nowrap;
     align-items: center;
     position: relative;
 
@@ -36,6 +37,7 @@ button:not([role="switch"]) {
       block-size: 0.3em;
       display: inline-block;
       clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      transition: transform var(--transition-time-quick);
     }
   }
 
@@ -43,7 +45,6 @@ button:not([role="switch"]) {
     border-bottom: 0;
     border-end-start-radius: 0;
     border-end-end-radius: 0;
-    padding-block-end: var(--spacing-3);
 
     &:hover {
       background: var(--color-content);
@@ -52,22 +53,31 @@ button:not([role="switch"]) {
     }
 
     &::after {
-      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      transform: rotate(180deg);
     }
 
     &::before {
       content: '';
       position: absolute;
       background-color: var(--color-content);
-      inset-inline-start: 0;
-      inset-inline-end: 0;
-      inset-block-end: -1px;
-      block-size: 1px;
-      z-index: calc(var(--z-index-max) + 1);
+      border-inline-start: solid 1px var(--color-content-border);
+      border-inline-end: solid 1px var(--color-content-border);
+      inset-inline-start: -1px;
+      inset-inline-end: -1px;
+      inset-block-start: 100%;
+      inline-size: 100%;
+      block-size: var(--spacing-1);
+      z-index: 3;
     }
   }
 }
 
 app-action-button:has([aria-expanded="false"]) + * {
   display: none;
+}
+
+@media (prefers-reduced-motion) {
+  button:not([role="switch"])[aria-expanded]::after {
+    transition: none;
+  }
 }
