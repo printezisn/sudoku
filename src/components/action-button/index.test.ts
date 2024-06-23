@@ -21,7 +21,7 @@ describe('ActionButton', () => {
       expect(button.getAttribute('aria-haspopup')).toEqual('true');
       expect(button.getAttribute('aria-controls')).toEqual('mymenu');
       expect(button.getAttribute('role')).toEqual('menuitem');
-      expect(button.innerHTML).toEqual('Press');
+      expect(button.innerHTML.startsWith('Press<svg')).toBeTruthy();
     });
 
     it('toggles aria-expanded on click', () => {
