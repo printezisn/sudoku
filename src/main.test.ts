@@ -8,6 +8,6 @@ describe('main page', () => {
   });
 
   it('renders the page content', () => {
-    expect(document.getElementsByClassName('themeSwitch')[0]).toBeTruthy();
+    expect(document.getElementsByClassName('feather-sun')[0]).toBeTruthy();
   });
 });
