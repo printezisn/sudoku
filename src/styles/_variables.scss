@@ -24,8 +24,8 @@ $total-spacings: 6;
     "#{$name}-white-shadow": hsla($hue, $color-saturation, $color-white-lightness, 10%),
     "#{$name}-grey-darkest": hsl($hue, 0%, 10%),
     "#{$name}-grey-darker": hsl($hue, 0%, 25%),
-    "#{$name}-grey-darker-shadow": hsla($hue, 0%, 25%, 20%),
     "#{$name}-grey-dark": hsl($hue, 0%, 40%),
+    "#{$name}-grey-dark-shadow": hsla($hue, 0%, 40%, 20%),
     "#{$name}-grey": hsl($hue, 0%, 50%),
     "#{$name}-grey-light": hsl($hue, 0%, 60%),
     "#{$name}-grey-lighter": hsl($hue, 0%, 75%),
@@ -128,10 +128,7 @@ $font-sizes: createFontSizes($total-font-sizes, $font-size-base);
 $line-heights: createLineHeights($total-font-sizes, $line-height-base);
 
 $screen-sizes: (
-  "tablet": 768,
-  "small-desktop": 1024,
-  "regular-desktop": 1280,
-  "large-desktop": 1920
+  "tablet": 768
 );
 
 $transition-times: (
