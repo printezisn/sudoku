@@ -5,11 +5,17 @@ button:not([role="switch"]) {
   padding-inline: var(--spacing-4);
   padding-block: var(--spacing-2);
   border-radius: var(--border-radius-large);
-  font-size: var(--font-size-2);
-  line-height: var(--line-height-2);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   cursor: pointer;
   outline-color: var(--color-primary);
   white-space: nowrap;
+  display: flex;
+  gap: var(--spacing-1);
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 
   &:hover {
     background: var(--color-content-hover);
@@ -23,22 +29,8 @@ button:not([role="switch"]) {
     border-color: var(--color-content-border);
   }
 
-  &[aria-expanded] {
-    display: flex;
-    gap: var(--spacing-1);
-    flex-wrap: nowrap;
-    align-items: center;
-    position: relative;
-
-    &::after {
-      content: '';
-      background-color: currentColor;
-      inline-size: 0.5em;
-      block-size: 0.3em;
-      display: inline-block;
-      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-      transition: transform var(--transition-time-quick);
-    }
+  .feather-chevron-down {
+    transition: transform var(--transition-time-quicker);
   }
 
   &[aria-expanded="true"] {
@@ -52,7 +44,7 @@ button:not([role="switch"]) {
       border-color: var(--color-content-border);
     }
 
-    &::after {
+    .feather-chevron-down {
       transform: rotate(180deg);
     }
 

@@ -27,7 +27,9 @@
 * {
   box-sizing: border-box;
   font-family: var(--font-family-text);
-  transition: background-color var(--transition-time-quick), color var(--transition-time-quick);
+  transition:
+    background-color var(--transition-time-quick),
+    color var(--transition-time-quick);
 }
 
 @media (prefers-reduced-motion) {
@@ -73,4 +75,9 @@ body {
 
 .block {
   padding-block-start: var(--spacing-4);
+}
+
+svg {
+  inline-size: 1em;
+  block-size: 1em;
 }

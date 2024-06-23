@@ -1,3 +1,5 @@
+import DownIcon from 'feather-icons/dist/icons/chevron-down.svg?raw';
+
 class ActionButton extends HTMLElement {
   private menu: string | null = null;
   private action: string | null = null;
@@ -43,7 +45,8 @@ class ActionButton extends HTMLElement {
     if (this.menu) {
       document.addEventListener('click', this.onDocumentClick);
     }
-    this.button.innerHTML = this.innerHTML;
+
+    this.button.innerHTML = this.innerHTML + (this.menu ? DownIcon : '');
 
     this.replaceChildren(this.button);
   }
