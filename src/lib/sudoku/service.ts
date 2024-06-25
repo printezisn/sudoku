@@ -89,6 +89,12 @@ export const setCellValue = (
   cellIndex: number,
   value: number | null
 ) => {
+  board.actions.push({
+    cellIndex,
+    from: board.cells[cellIndex].value,
+    to: value,
+    type: ActionType.CELL_CHANGE,
+  });
   board.cells[cellIndex].value = value;
   board.cells[cellIndex].color = board.currentColor;
 

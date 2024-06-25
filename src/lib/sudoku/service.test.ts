@@ -175,6 +175,14 @@ describe('sudoku service', () => {
       expect(board.cells[4].value).toEqual(5);
       expect(board.cells[4].color).toEqual(1);
       expect(board.cells[5].options).toEqual(new Set([1, 2, 3, 4, 6, 7, 8, 9]));
+      expect(board.actions).toEqual([
+        {
+          type: ActionType.CELL_CHANGE,
+          from: null,
+          to: 5,
+          cellIndex: 4,
+        },
+      ]);
     });
   });
 

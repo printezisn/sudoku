@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import '@vitest/web-worker';
 import Worker from './worker?worker';
 import { Difficulty, WorkerMessage, WorkerMessageType } from './models';
 import { createBoard } from './service';
