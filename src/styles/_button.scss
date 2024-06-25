@@ -1,4 +1,4 @@
-button:not([role="switch"]) {
+button:where(:not([role="switch"])) {
   background: var(--color-content);
   color: var(--color-content-text);
   border: solid 1px var(--color-content-border);

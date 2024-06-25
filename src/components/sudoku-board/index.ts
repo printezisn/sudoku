@@ -11,8 +11,12 @@ class SudokuBoard extends HTMLElement {
       const group = document.createElement('div');
 
       for (let j = 0; j < 9; j++) {
-        const cell = document.createElement('div');
-        cell.classList.add(styles.cell);
+        const row = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+        const col = (i % 3) * 3 + (j % 3);
+
+        const cell = document.createElement('app-sudoku-cell');
+        cell.setAttribute('row', row.toString());
+        cell.setAttribute('col', col.toString());
 
         group.appendChild(cell);
       }

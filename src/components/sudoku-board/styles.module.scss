@@ -15,8 +15,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  font-size: var(--font-size-4);
-  line-height: 0;
 
   & > * {
     border: solid 1px var(--color-content-text);
@@ -24,24 +22,5 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     position: relative;
-  }
-}
-
-.cell {
-  border: solid 1px var(--color-content-text);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@container (min-inline-size: 371px) and (max-inline-size: 450px) {
-  .inner {
-    font-size: var(--font-size-3);
-  }
-}
-
-@container (max-inline-size: 370px) {
-  .inner {
-    font-size: var(--font-size-2);
   }
 }

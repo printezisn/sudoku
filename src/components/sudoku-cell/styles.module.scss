@@ -1,0 +1,37 @@
+.cell {
+  border: solid 1px var(--color-content-text);
+  border-radius: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  font-size: var(--font-size-4);
+  line-height: 0;
+  padding: 0;
+
+  &.initial {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-content-hover-text);
+
+    &:hover {
+      color: var(--color-content-hover-text);
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-content);
+    border-color: var(--color-content-text);
+    color: var(--color-content-text);
+  }
+}
+
+@container (min-inline-size: 371px) and (max-inline-size: 450px) {
+  .cell {
+    font-size: var(--font-size-3);
+  }
+}
+
+@container (max-inline-size: 370px) {
+  .cell {
+    font-size: var(--font-size-2);
+  }
+}

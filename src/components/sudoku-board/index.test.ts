@@ -9,6 +9,10 @@ describe('SudokuBoard', () => {
   });
 
   it('renders all cells', () => {
-    expect(document.getElementsByClassName('cell').length).toEqual(81);
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        expect(document.querySelector(`[row="${i}"][col="${j}"]`)).toBeTruthy();
+      }
+    }
   });
 });
