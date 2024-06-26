@@ -42,6 +42,8 @@ const updateBoard = (board: Board) => {
 };
 
 const createGame = (difficulty: Difficulty) => {
+  if (state.loading) return;
+
   setLoading(true);
 
   worker.postMessage({
@@ -69,20 +71,28 @@ export const newHardGame = () => {
 };
 
 export const newEmptyGame = () => {
+  if (state.loading) return;
+
   updateBoard(service.createBoard(Difficulty.EMPTY));
 };
 
 export const undoOne = () => {
+  if (state.loading) return;
+
   service.undoSingle(state.board);
   updateBoard(state.board);
 };
 
 export const undoColor = () => {
+  if (state.loading) return;
+
   service.undoColor(state.board);
   updateBoard(state.board);
 };
 
 export const solve = () => {
+  if (state.loading) return;
+
   setLoading(true);
 
   worker.postMessage({
@@ -92,11 +102,15 @@ export const solve = () => {
 };
 
 export const changeColor = () => {
+  if (state.loading) return;
+
   service.changeColor(state.board);
   updateBoard(state.board);
 };
 
 export const updateCell = (index: number, value: number | null) => {
+  if (state.loading) return;
+
   service.setCellValue(state.board, index, value);
   updateBoard(state.board);
 };
