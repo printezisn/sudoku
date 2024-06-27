@@ -3,10 +3,16 @@ import ActionButton from '.';
 import { state } from '../../stores/game/actions';
 import { createBoard } from '../../lib/sudoku/service';
 import { Difficulty } from '../../lib/sudoku/models';
+import { SET_GAME_LOADING_ACTION } from '../../stores/game/constants';
 
 customElements.define('app-action-button', ActionButton);
 
 describe('ActionButton', () => {
+  beforeEach(() => {
+    state.board = createBoard(Difficulty.EMPTY);
+    state.loading = false;
+  });
+
   describe('when it controls a menu', () => {
     let button: HTMLButtonElement;
 
@@ -24,6 +30,7 @@ describe('ActionButton', () => {
       expect(button.getAttribute('aria-haspopup')).toEqual('true');
       expect(button.getAttribute('aria-controls')).toEqual('mymenu');
       expect(button.getAttribute('role')).toEqual('menuitem');
+      expect(button.ariaDisabled).toEqual('false');
       expect(button.innerHTML.startsWith('Press<svg')).toBeTruthy();
     });
 
@@ -40,15 +47,27 @@ describe('ActionButton', () => {
       document.querySelector('span')?.click();
       expect(button.getAttribute('aria-expanded')).toEqual('false');
     });
+
+    it('sets button as loading if state is loading', () => {
+      state.loading = true;
+
+      window.dispatchEvent(new CustomEvent(SET_GAME_LOADING_ACTION));
+
+      expect(button.ariaDisabled).toEqual('true');
+    });
+
+    it('does not run click actions if the button is disabled', () => {
+      button.ariaDisabled = 'true';
+      button.click();
+
+      expect(button.getAttribute('aria-expanded')).toEqual('false');
+    });
   });
 
   describe('when it does not control a menu', () => {
     let button: HTMLButtonElement;
 
     beforeEach(() => {
-      state.board = createBoard(Difficulty.EMPTY);
-      state.loading = false;
-
       document.body.innerHTML =
         '<app-action-button action="changeColor">Press</app-action-button>';
 
@@ -60,6 +79,7 @@ describe('ActionButton', () => {
       expect(button.getAttribute('aria-haspopup')).toBeFalsy();
       expect(button.getAttribute('aria-controls')).toBeFalsy();
       expect(button.getAttribute('role')).toEqual('menuitem');
+      expect(button.ariaDisabled).toEqual('false');
       expect(button.innerHTML).toEqual('Press');
     });
 

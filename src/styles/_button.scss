@@ -17,13 +17,14 @@ button:where(:not([role="switch"])) {
   justify-content: center;
   position: relative;
 
-  &:hover {
+  &:hover,
+  &[aria-disabled="true"] {
     background: var(--color-content-hover);
     border-color: var(--color-content-hover-border);
     color: var(--color-content-hover-text);
   }
 
-  &:active {
+  &:active[aria-disabled="false"] {
     background: var(--color-content);
     color: var(--color-content-text);
     border-color: var(--color-content-border);
