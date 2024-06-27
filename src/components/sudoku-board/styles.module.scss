@@ -24,3 +24,9 @@
     position: relative;
   }
 }
+
+.finished,
+.finished .inner,
+.finished .inner > * {
+  border-color: var(--color-success);
+}

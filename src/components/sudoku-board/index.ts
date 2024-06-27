@@ -1,8 +1,15 @@
+import { state } from '../../stores/game/actions';
+import { UPDATE_BOARD_ACTION } from '../../stores/game/constants';
 import styles from './styles.module.scss';
 
 class SudokuBoard extends HTMLElement {
+  private updateBoard = () => {
+    this.classList.toggle(styles.finished, state.board.finished);
+  };
+
   connectedCallback() {
     this.classList.add(styles.board);
+    this.classList.toggle(styles.finished, state.board.finished);
 
     const inner = document.createElement('div');
     inner.classList.add(styles.inner);
@@ -25,6 +32,12 @@ class SudokuBoard extends HTMLElement {
     }
 
     this.appendChild(inner);
+
+    window.addEventListener(UPDATE_BOARD_ACTION, this.updateBoard);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener(UPDATE_BOARD_ACTION, this.updateBoard);
   }
 }
 

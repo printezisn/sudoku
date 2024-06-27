@@ -56,4 +56,12 @@ describe('sudoku cell', () => {
 
     expect(cellButton.ariaDisabled).toEqual('true');
   });
+
+  it('is indicated as finished if the game has finished', () => {
+    state.board.finished = true;
+
+    window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
+
+    expect(cellButton.classList.contains('finished')).toBeTruthy();
+  });
 });

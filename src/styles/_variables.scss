@@ -6,6 +6,7 @@ $color-white-lightness: 99%;
 $color-black-lightness: 5%;
 
 $color-primary-hue: 199;
+$color-success-hue: 149;
 $color-warning-hue: 51;
 $color-error-hue: 7;
 $color-purple-hue: 281;
@@ -97,6 +98,7 @@ $colors: mergeMaps(
       "sudoku-5": "var(--color-purple)",
     ),
     "other": (
+      "success": hsl($color-success-hue, $color-saturation, $color-lightness),
       "warning": hsl($color-warning-hue, $color-saturation, $color-lightness),
       "error": hsl($color-error-hue, $color-saturation, $color-lightness),
       "purple": hsl($color-purple-hue, $color-saturation, $color-lightness),

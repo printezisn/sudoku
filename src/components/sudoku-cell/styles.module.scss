@@ -13,6 +13,11 @@
     --cell-bg-color: var(--color-content-hover);
   }
 
+  &.finished {
+    --cell-border-color: var(--color-success);
+    --cell-text-color: var(--color-success);
+  }
+
   background: var(--cell-bg-color);
   color: var(--cell-text-color);
   border: solid 1px var(--cell-border-color);

@@ -16,6 +16,7 @@ class SudokuCell extends HTMLElement {
       styles.initial,
       state.board.cells[this.index].initial
     );
+    this.button.classList.toggle(styles.finished, state.board.finished);
     this.button.innerHTML =
       state.board.cells[this.index].value?.toString() ?? '';
   };
