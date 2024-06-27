@@ -1,26 +1,34 @@
 .cell {
-  border: solid 1px var(--color-content-text);
+  --cell-bg-color: var(--color-content);
+  --cell-text-color: var(--color-content-text);
+  --cell-border-color: var(--color-content-text);
+  --cell-font-weight: var(--font-weight-normal);
+
+  &.initial {
+    --cell-font-weight: var(--font-weight-bold);
+    --cell-text-color: var(--color-content-hover-text);
+  }
+
+  &.loading {
+    --cell-bg-color: var(--color-content-hover);
+  }
+
+  background: var(--cell-bg-color);
+  color: var(--cell-text-color);
+  border: solid 1px var(--cell-border-color);
   border-radius: 0;
   display: block;
   inline-size: 100%;
   block-size: 100%;
   font-size: var(--font-size-4);
+  font-weight: var(--cell-font-weight);
   line-height: 0;
   padding: 0;
 
-  &.initial {
-    font-weight: var(--font-weight-bold);
-    color: var(--color-content-hover-text);
-
-    &:hover {
-      color: var(--color-content-hover-text);
-    }
-  }
-
   &:hover {
-    background-color: var(--color-content);
-    border-color: var(--color-content-text);
-    color: var(--color-content-text);
+    background: var(--cell-bg-color);
+    border-color: var(--cell-border-color);
+    color: var(--cell-text-color);
   }
 }
 

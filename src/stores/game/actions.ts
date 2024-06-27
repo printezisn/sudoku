@@ -1,3 +1,4 @@
+import { debounce } from '../../lib/helpers/timing-helpers';
 import {
   Board,
   Difficulty,
@@ -14,7 +15,7 @@ const worker = new Worker();
 worker.onmessage = (e) => {
   const message = e.data as WorkerMessage;
 
-  setLoading(false);
+  loadingDebounce.cancel();
   updateBoard(message.board as Board);
 };
 
@@ -30,10 +31,16 @@ const createState = (): GameState => {
 
 export const state = createState();
 
-const setLoading = (loading: boolean) => {
-  state.loading = loading;
-  window.dispatchEvent(new CustomEvent(SET_GAME_LOADING_ACTION));
-};
+const loadingDebounce = debounce(
+  () => {
+    state.loading = true;
+    window.dispatchEvent(new CustomEvent(SET_GAME_LOADING_ACTION));
+  },
+  () => {
+    state.loading = false;
+    window.dispatchEvent(new CustomEvent(SET_GAME_LOADING_ACTION));
+  }
+);
 
 const updateBoard = (board: Board) => {
   state.board = board;
@@ -44,7 +51,7 @@ const updateBoard = (board: Board) => {
 const createGame = (difficulty: Difficulty) => {
   if (state.loading) return;
 
-  setLoading(true);
+  loadingDebounce.start();
 
   worker.postMessage({
     type: WorkerMessageType.CREATE_NEW,
@@ -93,7 +100,7 @@ export const undoColor = () => {
 export const solve = () => {
   if (state.loading) return;
 
-  setLoading(true);
+  loadingDebounce.start();
 
   worker.postMessage({
     type: WorkerMessageType.SOLVE,
