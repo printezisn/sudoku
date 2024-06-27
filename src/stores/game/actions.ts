@@ -86,14 +86,14 @@ export const newEmptyGame = () => {
 };
 
 export const undoOne = () => {
-  if (state.loading) return;
+  if (state.loading || state.board.finished) return;
 
   service.undoSingle(state.board);
   updateBoard(state.board);
 };
 
 export const undoColor = () => {
-  if (state.loading) return;
+  if (state.loading || state.board.finished) return;
 
   service.undoColor(state.board);
   updateBoard(state.board);

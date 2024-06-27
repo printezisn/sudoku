@@ -169,7 +169,9 @@ describe('game store actions', () => {
   describe('undoOne', () => {
     let lastValue: number | null = null;
 
-    beforeEach(() => {
+    beforeEach(async () => {
+      lastValue = null;
+
       window.addEventListener(UPDATE_BOARD_ACTION, () => {
         lastValue = state.board.cells[1].value;
       });
@@ -182,6 +184,14 @@ describe('game store actions', () => {
       undoOne();
 
       await waitFor(() => expect(lastValue).toEqual(3));
+    });
+
+    it('skips the action if the game has finished', () => {
+      state.board.finished = true;
+
+      undoOne();
+
+      expect(lastValue).toBeNull();
     });
 
     it('saves the game', async () => {
@@ -213,6 +223,14 @@ describe('game store actions', () => {
       await waitFor(() => expect(updateCalled).toBeTruthy());
       expect(state.board.cells[2].value).toEqual(5);
       expect(state.board.cells[1].value).toBeNull();
+    });
+
+    it('skips the action if the game has finished', () => {
+      state.board.finished = true;
+
+      undoColor();
+
+      expect(state.board.cells[1].value).toEqual(4);
     });
 
     it('saves the game', async () => {
