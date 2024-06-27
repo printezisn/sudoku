@@ -21,7 +21,7 @@ class SudokuCell extends HTMLElement {
   };
 
   private setLoading = async () => {
-    this.button.classList.toggle(styles.loading, state.loading);
+    this.button.ariaDisabled = state.loading ? 'true' : 'false';
   };
 
   connectedCallback() {
@@ -33,6 +33,7 @@ class SudokuCell extends HTMLElement {
     this.button.ariaLabel = `Sudoku cell row ${this.row + 1} and column ${
       this.col + 1
     }`;
+    this.button.ariaDisabled = 'false';
     this.appendChild(this.button);
 
     this.update();

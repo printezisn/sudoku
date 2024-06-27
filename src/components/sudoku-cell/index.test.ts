@@ -49,11 +49,11 @@ describe('sudoku cell', () => {
     expect(cellButton.classList.contains('initial')).toBeTruthy();
   });
 
-  it('shows loading status if state is loading', () => {
+  it('is disabled if the state is loading', () => {
     state.loading = true;
 
     window.dispatchEvent(new CustomEvent(SET_GAME_LOADING_ACTION));
 
-    expect(cellButton.classList.contains('loading')).toBeTruthy();
+    expect(cellButton.ariaDisabled).toEqual('true');
   });
 });

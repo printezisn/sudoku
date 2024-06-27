@@ -9,7 +9,7 @@
     --cell-text-color: var(--color-content-hover-text);
   }
 
-  &.loading {
+  &[aria-disabled="true"] {
     --cell-bg-color: var(--color-content-hover);
   }
 
@@ -25,7 +25,9 @@
   line-height: 0;
   padding: 0;
 
-  &:hover {
+  &:hover,
+  &:active[aria-disabled="false"],
+  &[aria-disabled="true"] {
     background: var(--cell-bg-color);
     border-color: var(--cell-border-color);
     color: var(--cell-text-color);
