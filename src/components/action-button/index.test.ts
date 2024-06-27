@@ -1,5 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import ActionButton from '.';
+import { state } from '../../stores/game/actions';
+import { createBoard } from '../../lib/sudoku/service';
+import { Difficulty } from '../../lib/sudoku/models';
 
 customElements.define('app-action-button', ActionButton);
 
@@ -9,7 +12,7 @@ describe('ActionButton', () => {
 
     beforeEach(() => {
       document.body.innerHTML = `
-        <app-action-button menu="mymenu" action="run">Press</app-action-button>
+        <app-action-button menu="mymenu">Press</app-action-button>
         <span></span>
       `;
 
@@ -43,8 +46,11 @@ describe('ActionButton', () => {
     let button: HTMLButtonElement;
 
     beforeEach(() => {
+      state.board = createBoard(Difficulty.EMPTY);
+      state.loading = false;
+
       document.body.innerHTML =
-        '<app-action-button action="run">Press</app-action-button>';
+        '<app-action-button action="changeColor">Press</app-action-button>';
 
       button = document.querySelector('button') as HTMLButtonElement;
     });
@@ -61,6 +67,12 @@ describe('ActionButton', () => {
       button.click();
 
       expect(button.getAttribute('aria-expanded')).toBeFalsy();
+    });
+
+    it('runs its action on click', () => {
+      button.click();
+
+      expect(state.board.currentColor).toEqual(1);
     });
   });
 });

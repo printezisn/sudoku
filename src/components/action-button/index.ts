@@ -1,4 +1,7 @@
+import * as actions from '../../stores/game/actions';
 import DownIcon from 'feather-icons/dist/icons/chevron-down.svg?raw';
+
+const sudokuActions = actions as unknown as { [a: string]: () => void };
 
 class ActionButton extends HTMLElement {
   private menu: string | null = null;
@@ -14,8 +17,7 @@ class ActionButton extends HTMLElement {
         this.button.ariaExpanded === 'true' ? 'false' : 'true';
     }
     if (this.action) {
-      //TODO
-      console.log(this.action);
+      sudokuActions[this.action]();
     }
   };
 
