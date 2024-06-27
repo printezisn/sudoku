@@ -1,12 +1,27 @@
 import * as actions from '../../stores/game/actions';
 import DownIcon from 'feather-icons/dist/icons/chevron-down.svg?raw';
-import { SET_GAME_LOADING_ACTION } from '../../stores/game/constants';
+import RotateArrowIcon from 'feather-icons/dist/icons/rotate-ccw.svg?raw';
+import PlusIcon from 'feather-icons/dist/icons/plus.svg?raw';
+import CheckIcon from 'feather-icons/dist/icons/check.svg?raw';
+import {
+  SET_GAME_LOADING_ACTION,
+  UPDATE_BOARD_ACTION,
+} from '../../stores/game/constants';
+import styles from './styles.module.scss';
 
 const sudokuActions = actions as unknown as { [a: string]: () => void };
 
+const icons: { [i: string]: string } = {
+  'rotate-arrow': RotateArrowIcon,
+  plus: PlusIcon,
+  check: CheckIcon,
+  changeColor: `<span class="${styles.colorIcon}"></span>`,
+};
+
 class ActionButton extends HTMLElement {
-  private menu: string | null = null;
-  private action: string | null = null;
+  private menu: string = '';
+  private action: string = '';
+  private icon: string = '';
   private button: HTMLButtonElement = document.createElement('button');
   private hasClickedButton = false;
 
@@ -41,15 +56,28 @@ class ActionButton extends HTMLElement {
     }
   };
 
+  private setColor = () => {
+    this.button.setAttribute(
+      'data-color',
+      actions.state.board.currentColor.toString()
+    );
+  };
+
   connectedCallback() {
-    this.action = this.getAttribute('action');
-    this.menu = this.getAttribute('menu');
+    this.action = this.getAttribute('action') ?? '';
+    this.menu = this.getAttribute('menu') ?? '';
+    this.icon = this.getAttribute('icon') ?? '';
 
     this.role = 'presentation';
 
     this.button = document.createElement('button');
     this.button.role = 'menuitem';
     this.button.ariaDisabled = 'false';
+    this.button.setAttribute(
+      'data-color',
+      actions.state.board.currentColor.toString()
+    );
+    this.button.classList.add(styles.button);
     if (this.menu) {
       this.button.ariaHasPopup = 'true';
       this.button.setAttribute('aria-controls', this.menu);
@@ -57,18 +85,22 @@ class ActionButton extends HTMLElement {
     }
 
     window.addEventListener(SET_GAME_LOADING_ACTION, this.setLoading);
+    window.addEventListener(UPDATE_BOARD_ACTION, this.setColor);
     this.button.addEventListener('click', this.onButtonClick);
     if (this.menu) {
       document.addEventListener('click', this.onDocumentClick);
     }
 
-    this.button.innerHTML = this.innerHTML + (this.menu ? DownIcon : '');
+    this.button.innerHTML = `${icons[this.icon] ?? ''}${this.innerHTML}${
+      this.menu ? DownIcon : ''
+    }`;
 
     this.replaceChildren(this.button);
   }
 
   disconnectedCallback() {
     window.removeEventListener(SET_GAME_LOADING_ACTION, this.setLoading);
+    window.removeEventListener(UPDATE_BOARD_ACTION, this.setColor);
     this.button.removeEventListener('click', this.onButtonClick);
     if (this.menu) {
       document.removeEventListener('click', this.onDocumentClick);

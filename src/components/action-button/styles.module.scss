@@ -1,0 +1,10 @@
+.colorIcon {
+  inline-size: 1em;
+  block-size: 1em;
+}
+
+@for $i from 0 through 5 {
+  .button[data-color="#{$i}"] .colorIcon {
+    background-color: var(--color-sudoku-#{$i + 1});
+  }
+}

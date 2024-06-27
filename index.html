@@ -40,7 +40,7 @@
           <h2 id="menu-label" class="sr-only">Actions</h2>
           <ul role="menu" aria-labelledby="menu-label">
             <li role="presentation">
-              <app-action-button menu="new-game-menu">New</app-action-button>
+              <app-action-button menu="new-game-menu" icon="plus">New</app-action-button>
               <ul id="new-game-menu" role="menu" aria-label="New game options">
                 <li role="presentation">
                   <app-action-button action="newEasyGame">Easy</app-action-button>
@@ -57,7 +57,7 @@
               </ul>
             </li>
             <li role="presentation">
-              <app-action-button menu="undo-menu">Undo</app-action-button>
+              <app-action-button menu="undo-menu" icon="rotate-arrow">Undo</app-action-button>
               <ul id="undo-menu" role="menu" aria-label="Undo options">
                 <li role="presentation">
                   <app-action-button action="undoOne">Undo One Move</app-action-button>
@@ -68,10 +68,10 @@
               </ul>
             </li>
             <li role="presentation">
-              <app-action-button action="solve">Solve</app-action-button>
+              <app-action-button action="solve" icon="check">Solve</app-action-button>
             </li>
             <li role="presentation">
-              <app-action-button action="changeColor">Change Color</app-action-button>
+              <app-action-button action="changeColor" icon="changeColor">Change Color</app-action-button>
             </li>
           </ul>
         </section>

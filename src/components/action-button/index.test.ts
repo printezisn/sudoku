@@ -3,7 +3,10 @@ import ActionButton from '.';
 import { state } from '../../stores/game/actions';
 import { createBoard } from '../../lib/sudoku/service';
 import { Difficulty } from '../../lib/sudoku/models';
-import { SET_GAME_LOADING_ACTION } from '../../stores/game/constants';
+import {
+  SET_GAME_LOADING_ACTION,
+  UPDATE_BOARD_ACTION,
+} from '../../stores/game/constants';
 
 customElements.define('app-action-button', ActionButton);
 
@@ -31,6 +34,7 @@ describe('ActionButton', () => {
       expect(button.getAttribute('aria-controls')).toEqual('mymenu');
       expect(button.getAttribute('role')).toEqual('menuitem');
       expect(button.ariaDisabled).toEqual('false');
+      expect(button.getAttribute('data-color')).toEqual('0');
       expect(button.innerHTML.startsWith('Press<svg')).toBeTruthy();
     });
 
@@ -61,6 +65,25 @@ describe('ActionButton', () => {
       button.click();
 
       expect(button.getAttribute('aria-expanded')).toEqual('false');
+    });
+
+    it('displays an icon if it is provided', () => {
+      document.body.innerHTML = `
+        <app-action-button menu="mymenu" icon="check">Press</app-action-button>
+        <span></span>
+      `;
+
+      button = document.querySelector('button') as HTMLButtonElement;
+
+      expect(button.getElementsByClassName('feather-check').length).toEqual(1);
+    });
+
+    it('updates the indicated color when it changes', () => {
+      state.board.currentColor = 1;
+
+      window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
+
+      expect(button.getAttribute('data-color')).toEqual('1');
     });
   });
 
