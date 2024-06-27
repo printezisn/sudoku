@@ -16,7 +16,9 @@ worker.onmessage = (e) => {
   const message = e.data as WorkerMessage;
 
   loadingDebounce.cancel();
-  updateBoard(message.board as Board);
+  if (message.board) {
+    updateBoard(message.board);
+  }
 };
 
 const createState = (): GameState => {
