@@ -104,3 +104,7 @@ svg {
 a {
   color: var(--color-primary);
 }
+
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}

@@ -3,50 +3,104 @@
   --cell-text-color: var(--color-content-text);
   --cell-border-color: var(--color-content-text);
   --cell-font-weight: var(--font-weight-normal);
+  --cell-font-size: var(--font-size-4);
 
-  &.initial {
-    --cell-font-weight: var(--font-weight-bold);
-    --cell-text-color: var(--color-content-hover-text);
-  }
+  position: relative;
 
-  &[aria-disabled="true"] {
-    --cell-bg-color: var(--color-content-hover);
-  }
+  & > button {
+    &.initial {
+      --cell-font-weight: var(--font-weight-bold);
+      --cell-text-color: var(--color-content-hover-text);
+    }
 
-  &.finished {
-    --cell-border-color: var(--color-success);
-    --cell-text-color: var(--color-success);
-  }
+    &[aria-disabled="true"] {
+      --cell-bg-color: var(--color-content-hover);
+    }
 
-  background: var(--cell-bg-color);
-  color: var(--cell-text-color);
-  border: solid 1px var(--cell-border-color);
-  border-radius: 0;
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  font-size: var(--font-size-4);
-  font-weight: var(--cell-font-weight);
-  line-height: 0;
-  padding: 0;
+    &.finished {
+      --cell-border-color: var(--color-success);
+      --cell-text-color: var(--color-success);
+    }
 
-  &:hover,
-  &:active[aria-disabled="false"],
-  &[aria-disabled="true"] {
     background: var(--cell-bg-color);
-    border-color: var(--cell-border-color);
     color: var(--cell-text-color);
+    border: solid 1px var(--cell-border-color);
+    border-radius: 0;
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    font-size: var(--cell-font-size);
+    font-weight: var(--cell-font-weight);
+    line-height: 0;
+    padding: 0;
+
+    &:hover,
+    &:active[aria-disabled="false"],
+    &[aria-disabled="true"] {
+      background: var(--cell-bg-color);
+      border-color: var(--cell-border-color);
+      color: var(--cell-text-color);
+    }
+
+    &[aria-expanded="true"]::before {
+      content: unset;
+    }
+  }
+
+  [role="listbox"] {
+    display: none;
+    position: absolute;
+    inset-block-start: calc(100% + 1px);
+    inset-inline-start: 0;
+    z-index: 2;
+    box-shadow:
+      1px 2px 2px var(--color-content-shadow),
+      2px 4px 4px var(--color-content-shadow);
+    background-color: var(--cell-bg-color);
+    border: solid 1px var(--color-content-border);
+
+    &.right {
+      inset-inline-start: unset;
+      inset-inline-end: 0;
+    }
+
+    & > button {
+      background-color: var(--cell-bg-color);
+      color: var(--cell-text-color);
+      border: 0;
+      border-radius: 0;
+      padding: var(--spacing-4);
+      font-size: var(--font-size-2);
+      line-height: 0;
+
+      &:hover,
+      &[aria-disabled="true"] {
+        background-color: var(--color-content-hover);
+        color: var(--color-content-hover-text);
+      }
+
+      &:first-child {
+        grid-column-start: 1;
+        grid-column-end: 4;
+      }
+    }
+  }
+
+  [aria-expanded="true"] + [role="listbox"] {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @container (min-inline-size: 371px) and (max-inline-size: 450px) {
   .cell {
-    font-size: var(--font-size-3);
+    --cell-font-size: var(--font-size-3);
   }
 }
 
 @container (max-inline-size: 370px) {
   .cell {
-    font-size: var(--font-size-2);
+    --cell-font-size: var(--font-size-2);
   }
 }

@@ -93,4 +93,25 @@ describe('sudoku cell', () => {
       'Sudoku cell row 3 and column 4. 5 is selected. Click to select another number.'
     );
   });
+
+  it('shows the options dropdown, with all available options, when the button is clicked', () => {
+    cellButton.click();
+
+    expect(cellButton.ariaExpanded).toEqual('true');
+    expect(
+      Array.from(cellDropdown.querySelectorAll('button')).map(
+        (b) => b.innerHTML
+      )
+    ).toEqual(['-', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
+  });
+
+  it('hides the options dropdown if the user clicks anywhere else', () => {
+    cellButton.click();
+
+    expect(cellButton.ariaExpanded).toEqual('true');
+
+    cellButton.click();
+
+    expect(cellButton.ariaExpanded).toEqual('false');
+  });
 });

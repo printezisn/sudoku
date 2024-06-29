@@ -79,6 +79,7 @@ class ActionButton extends HTMLElement {
     this.role = 'presentation';
 
     this.button = document.createElement('button');
+    this.button.type = 'button';
     this.button.role = 'menuitem';
     this.button.ariaDisabled = 'false';
     this.button.setAttribute(

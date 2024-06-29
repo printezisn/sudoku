@@ -22,7 +22,7 @@ $total-spacings: 6;
     "#{$name}-text": hsl($hue, $color-saturation, $text-lightness),
     "#{$name}-black": hsl($hue, $color-saturation, $color-black-lightness),
     "#{$name}-white": hsl($hue, $color-saturation, $color-white-lightness),
-    "#{$name}-white-shadow": hsla($hue, $color-saturation, $color-white-lightness, 10%),
+    "#{$name}-white-shadow": hsla($hue, $color-saturation, $color-white-lightness, 20%),
     "#{$name}-grey-darkest": hsl($hue, 0%, 10%),
     "#{$name}-grey-darker": hsl($hue, 0%, 25%),
     "#{$name}-grey-dark": hsl($hue, 0%, 40%),

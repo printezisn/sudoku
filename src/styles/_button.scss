@@ -36,8 +36,8 @@ a.button {
     transition: transform var(--transition-time-quicker);
   }
 
-  &[aria-expanded="true"] {
-    border-bottom: 0;
+  &:where([aria-expanded="true"]) {
+    border-block-end: 0;
     border-end-start-radius: 0;
     border-end-end-radius: 0;
 
