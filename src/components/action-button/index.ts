@@ -49,8 +49,9 @@ class ActionButton extends HTMLElement {
   };
 
   private onDocumentKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && this.button.ariaExpanded === 'true') {
       this.button.ariaExpanded = 'false';
+      this.button.focus();
     }
   };
 
