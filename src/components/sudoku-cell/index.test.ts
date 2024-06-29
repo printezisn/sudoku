@@ -12,6 +12,7 @@ customElements.define('app-sudoku-cell', SudokuCell);
 
 describe('sudoku cell', () => {
   let cellButton: HTMLButtonElement;
+  let cellDropdown: HTMLElement;
 
   beforeEach(() => {
     state.board = service.createBoard(Difficulty.EMPTY);
@@ -23,6 +24,9 @@ describe('sudoku cell', () => {
     cellButton = document.querySelector(
       '[aria-label="Sudoku cell row 3 and column 4. No number selected. Click to select a number."]'
     ) as HTMLButtonElement;
+    cellDropdown = document.getElementById(
+      'sudoku-cell-dropdown-2-3'
+    ) as HTMLElement;
   });
 
   it('renders a cell button', () => {
@@ -30,16 +34,28 @@ describe('sudoku cell', () => {
     expect(cellButton.value).toBeFalsy();
   });
 
-  it('renders regular cell value', () => {
+  it('renders an options dropdown', () => {
+    expect(cellDropdown).toBeTruthy();
+    expect(cellDropdown.ariaLabel).toEqual('Cell options');
+    expect(cellDropdown.role).toEqual('listbox');
+    expect(cellDropdown.innerHTML).toBeFalsy();
+  });
+
+  it('renders regular cell', () => {
     state.board.cells[21].value = 5;
 
     window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
 
     expect(cellButton.innerHTML).toEqual('5');
     expect(cellButton.classList.contains('initial')).toBeFalsy();
+    expect(cellButton.getAttribute('aria-haspopup')).toEqual('true');
+    expect(cellButton.getAttribute('aria-expanded')).toEqual('false');
+    expect(cellButton.getAttribute('aria-controls')).toEqual(
+      'sudoku-cell-dropdown-2-3'
+    );
   });
 
-  it('renders initial cell value', () => {
+  it('renders initial cell', () => {
     state.board.cells[21].value = 5;
     state.board.cells[21].initial = true;
 
@@ -47,6 +63,9 @@ describe('sudoku cell', () => {
 
     expect(cellButton.innerHTML).toEqual('5');
     expect(cellButton.classList.contains('initial')).toBeTruthy();
+    expect(cellButton.getAttribute('aria-haspopup')).toBeFalsy();
+    expect(cellButton.getAttribute('aria-expanded')).toBeFalsy();
+    expect(cellButton.getAttribute('aria-controls')).toBeFalsy();
   });
 
   it('is disabled if the state is loading', () => {

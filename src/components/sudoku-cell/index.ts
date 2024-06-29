@@ -10,8 +10,9 @@ class SudokuCell extends HTMLElement {
   private col = 0;
   private index = 0;
   private button: HTMLButtonElement = document.createElement('button');
+  private dropdown: HTMLElement = document.createElement('div');
 
-  private update = () => {
+  private updateButton = () => {
     this.button.classList.toggle(
       styles.initial,
       state.board.cells[this.index].initial
@@ -20,6 +21,23 @@ class SudokuCell extends HTMLElement {
     this.button.ariaLabel = this.getButtonLabel();
     this.button.innerHTML =
       state.board.cells[this.index].value?.toString() ?? '';
+
+    if (state.board.cells[this.index].initial) {
+      this.button.removeAttribute('aria-expanded');
+      this.button.removeAttribute('aria-haspopup');
+      this.button.removeAttribute('aria-controls');
+    } else {
+      this.button.ariaExpanded = 'false';
+      this.button.ariaHasPopup = 'true';
+      this.button.setAttribute('aria-controls', this.dropdown.id);
+    }
+  };
+
+  private updateDropdown = () => {};
+
+  private update = () => {
+    this.updateButton();
+    this.updateDropdown();
   };
 
   private setLoading = async () => {
@@ -39,16 +57,29 @@ class SudokuCell extends HTMLElement {
     }. ${value} is selected. Click to select another number.`;
   };
 
+  private initButton = () => {
+    this.button.classList.add(styles.cell);
+    this.button.id = `sudoku-cell-${this.row}-${this.col}`;
+    this.button.ariaDisabled = 'false';
+
+    this.appendChild(this.button);
+  };
+
+  private initDropdown = () => {
+    this.dropdown.id = `sudoku-cell-dropdown-${this.row}-${this.col}`;
+    this.dropdown.role = 'listbox';
+    this.dropdown.ariaLabel = 'Cell options';
+
+    this.appendChild(this.dropdown);
+  };
+
   connectedCallback() {
     this.row = Number(this.getAttribute('row'));
     this.col = Number(this.getAttribute('col'));
     this.index = this.row * 9 + this.col;
 
-    this.button.classList.add(styles.cell);
-    this.button.id = `sudoku-cell-${this.row}-${this.col}`;
-    this.button.ariaLabel = this.getButtonLabel();
-    this.button.ariaDisabled = 'false';
-    this.appendChild(this.button);
+    this.initButton();
+    this.initDropdown();
 
     this.update();
 
