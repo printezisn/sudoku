@@ -87,6 +87,11 @@ body {
   justify-content: flex-end;
 }
 
+.align-center {
+  display: flex;
+  justify-content: center;
+}
+
 .block {
   padding-block-start: var(--spacing-4);
 }

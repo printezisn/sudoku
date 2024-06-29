@@ -1,4 +1,5 @@
-button:where(:not([role="switch"])) {
+button:where(:not([role="switch"])),
+a.button {
   background: var(--color-content);
   color: var(--color-content-text);
   border: solid 1px var(--color-content-border);
@@ -16,6 +17,7 @@ button:where(:not([role="switch"])) {
   align-items: center;
   justify-content: center;
   position: relative;
+  text-decoration: none;
 
   &:hover,
   &[aria-disabled="true"] {
