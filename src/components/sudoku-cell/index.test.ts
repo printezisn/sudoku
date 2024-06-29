@@ -82,6 +82,9 @@ describe('sudoku cell', () => {
     window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
 
     expect(cellButton.classList.contains('finished')).toBeTruthy();
+    expect(cellButton.getAttribute('aria-haspopup')).toBeFalsy();
+    expect(cellButton.getAttribute('aria-expanded')).toBeFalsy();
+    expect(cellButton.getAttribute('aria-controls')).toBeFalsy();
   });
 
   it('changes label if a number is selected', () => {

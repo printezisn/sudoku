@@ -23,7 +23,7 @@ class SudokuCell extends HTMLElement {
     this.button.innerHTML =
       state.board.cells[this.index].value?.toString() ?? '';
 
-    if (state.board.cells[this.index].initial) {
+    if (state.board.cells[this.index].initial || state.board.finished) {
       this.button.ariaExpanded = null;
       this.button.ariaHasPopup = null;
       this.button.removeAttribute('aria-controls');
@@ -37,8 +37,7 @@ class SudokuCell extends HTMLElement {
   private onButtonClick = () => {
     if (
       this.button.ariaDisabled === 'true' ||
-      this.button.ariaExpanded == null ||
-      this.button.ariaExpanded === 'true'
+      this.button.ariaExpanded !== 'false'
     ) {
       return;
     }
