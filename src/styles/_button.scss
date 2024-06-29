@@ -20,16 +20,20 @@ a.button {
   text-decoration: none;
 
   &:hover,
-  &[aria-disabled="true"] {
+  &:where([aria-disabled="true"]) {
     background: var(--color-content-hover);
     border-color: var(--color-content-hover-border);
     color: var(--color-content-hover-text);
   }
 
-  &:active[aria-disabled="false"] {
+  &:active:where([aria-disabled="false"]) {
     background: var(--color-content);
     color: var(--color-content-text);
     border-color: var(--color-content-border);
+  }
+
+  &:where([aria-disabled="true"]) {
+    cursor: not-allowed;
   }
 
   .feather-chevron-down {

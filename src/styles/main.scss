@@ -27,9 +27,7 @@
 * {
   box-sizing: border-box;
   font-family: var(--font-family-text);
-  transition:
-    background-color var(--transition-time-quick),
-    color var(--transition-time-quick);
+  transition: color var(--transition-time-quick);
 }
 
 @media (prefers-reduced-motion) {
@@ -103,8 +101,4 @@ svg {
 
 a {
   color: var(--color-primary);
-}
-
-[aria-disabled="true"] {
-  cursor: not-allowed;
 }
