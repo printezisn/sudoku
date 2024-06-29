@@ -30,5 +30,6 @@ The app is implemented in Typescript (without any frameworks like React) and use
 - `npm run build` to build the app for production.
 - `npm run preview` to run a preview of the app as it were in production (required `npm run build` first).
 - `npm test` to run the tests.
+- `npm test:coverage` to run the tests and provide a report on coverage.
 - `npm run lint` to run the linter.
 - `npm run format` to fix applicable linting errors.
