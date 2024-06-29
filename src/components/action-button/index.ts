@@ -36,6 +36,7 @@ class ActionButton extends HTMLElement {
     }
     if (this.action) {
       sudokuActions[this.action]();
+      document.getElementById('sudoku-cell-0-0')?.focus();
     }
   };
 
