@@ -11,6 +11,9 @@ export default defineConfig({
         classNameStrategy: 'non-scoped',
       },
     },
+    coverage: {
+      include: ['src'],
+    },
   },
   base: '/sudoku',
 });
