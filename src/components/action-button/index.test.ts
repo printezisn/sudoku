@@ -85,6 +85,14 @@ describe('ActionButton', () => {
 
       expect(button.getAttribute('data-color')).toEqual('1');
     });
+
+    it('closes the menu if the user clicks escape', () => {
+      button.ariaExpanded = 'true';
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+      expect(button.ariaExpanded).toEqual('false');
+    });
   });
 
   describe('when it does not control a menu', () => {

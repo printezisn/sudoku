@@ -48,6 +48,12 @@ class ActionButton extends HTMLElement {
     }
   };
 
+  private onDocumentKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      this.button.ariaExpanded = 'false';
+    }
+  };
+
   private setLoading = () => {
     if (actions.state.loading) {
       this.button.ariaDisabled = 'true';
@@ -89,7 +95,8 @@ class ActionButton extends HTMLElement {
     window.addEventListener(UPDATE_BOARD_ACTION, this.setColor);
     this.button.addEventListener('click', this.onButtonClick);
     if (this.menu) {
-      document.addEventListener('click', this.onDocumentClick);
+      window.addEventListener('keydown', this.onDocumentKeyDown);
+      window.addEventListener('click', this.onDocumentClick);
     }
 
     this.button.innerHTML = `${icons[this.icon] ?? ''}${this.innerHTML}${
@@ -104,7 +111,8 @@ class ActionButton extends HTMLElement {
     window.removeEventListener(UPDATE_BOARD_ACTION, this.setColor);
     this.button.removeEventListener('click', this.onButtonClick);
     if (this.menu) {
-      document.removeEventListener('click', this.onDocumentClick);
+      window.removeEventListener('keydown', this.onDocumentKeyDown);
+      window.removeEventListener('click', this.onDocumentClick);
     }
   }
 }
