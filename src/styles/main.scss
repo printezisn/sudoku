@@ -59,9 +59,19 @@ body {
   margin: -1px;
   padding: 0;
   border-width: 0;
-  clip-path: rect(0, 0, 0, 0);
+  clip: rect(1px, 1px, 1px, 1px);
   position: absolute;
   overflow: hidden;
+
+  &:focus {
+    white-space: normal;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0;
+    clip: auto;
+    position: static;
+    overflow: auto;
+  }
 }
 
 .curtain {
@@ -84,4 +94,8 @@ body {
 svg {
   inline-size: 1em;
   block-size: 1em;
+}
+
+a {
+  color: var(--color-primary);
 }

@@ -45,6 +45,7 @@ class SudokuCell extends HTMLElement {
     this.index = this.row * 9 + this.col;
 
     this.button.classList.add(styles.cell);
+    this.button.id = `sudoku-cell-${this.row}-${this.col}`;
     this.button.ariaLabel = this.getButtonLabel();
     this.button.ariaDisabled = 'false';
     this.appendChild(this.button);
