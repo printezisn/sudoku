@@ -27,6 +27,10 @@ class SudokuCell extends HTMLElement {
       state.board.cells[this.index].color.toString()
     );
 
+    if (this.button.ariaExpanded === 'true') {
+      this.dropdown.innerHTML = '';
+    }
+
     if (state.board.cells[this.index].initial || state.board.finished) {
       this.button.ariaExpanded = null;
       this.button.ariaHasPopup = null;
@@ -70,8 +74,7 @@ class SudokuCell extends HTMLElement {
     if (this.hasClickedButton) {
       this.hasClickedButton = false;
     } else if (this.button.ariaExpanded === 'true') {
-      this.button.ariaExpanded = 'false';
-      this.dropdown.innerHTML = '';
+      this.update();
     }
   };
 
@@ -82,9 +85,6 @@ class SudokuCell extends HTMLElement {
     }
 
     const newValue = option.innerHTML === '-' ? null : Number(option.innerHTML);
-    this.button.ariaExpanded = 'false';
-    this.dropdown.innerHTML = '';
-
     updateCell(this.index, newValue);
   };
 
