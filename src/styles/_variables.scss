@@ -91,7 +91,7 @@ $colors: mergeMaps(
   (
     "primary": createColors("primary", $color-primary-hue, $color-black-lightness),
     "sudoku": (
-      "sudoku-1": "var(--color-primary-black)",
+      "sudoku-1": "var(--color-content-text)",
       "sudoku-2": "var(--color-primary)",
       "sudoku-3": "var(--color-warning)",
       "sudoku-4": "var(--color-error)",

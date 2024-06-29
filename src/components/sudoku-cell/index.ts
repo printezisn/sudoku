@@ -22,6 +22,10 @@ class SudokuCell extends HTMLElement {
     this.button.ariaLabel = this.getButtonLabel();
     this.button.innerHTML =
       state.board.cells[this.index].value?.toString() ?? '';
+    this.button.setAttribute(
+      'data-color',
+      state.board.cells[this.index].color.toString()
+    );
 
     if (state.board.cells[this.index].initial || state.board.finished) {
       this.button.ariaExpanded = null;

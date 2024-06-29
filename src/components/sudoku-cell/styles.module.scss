@@ -8,6 +8,12 @@
   position: relative;
 
   & > button {
+    @for $i from 0 through 5 {
+      &[data-color="#{$i}"] {
+        --cell-text-color: var(--color-sudoku-#{$i + 1});
+      }
+    }
+    
     &.initial {
       --cell-font-weight: var(--font-weight-bold);
       --cell-text-color: var(--color-content-hover-text);
