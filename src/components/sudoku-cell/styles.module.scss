@@ -64,6 +64,11 @@
       inset-inline-end: 0;
     }
 
+    &.top {
+      inset-block-start: unset;
+      inset-block-end: 100%;
+    }
+
     & > button {
       background-color: var(--cell-bg-color);
       color: var(--cell-text-color);

@@ -1,4 +1,4 @@
-import { state } from '../../stores/game/actions';
+import { state, updateCell } from '../../stores/game/actions';
 import {
   SET_GAME_LOADING_ACTION,
   UPDATE_BOARD_ACTION,
@@ -72,6 +72,19 @@ class SudokuCell extends HTMLElement {
     }
   };
 
+  private onDropdownClick = (e: MouseEvent) => {
+    const option = e.target as HTMLButtonElement;
+    if (option?.role !== 'option' || option.ariaDisabled === 'true') {
+      return;
+    }
+
+    const newValue = option.innerHTML === '-' ? null : Number(option.innerHTML);
+    this.button.ariaExpanded = 'false';
+    this.dropdown.innerHTML = '';
+
+    updateCell(this.index, newValue);
+  };
+
   private setLoading = async () => {
     this.button.ariaDisabled = state.loading ? 'true' : 'false';
   };
@@ -102,6 +115,7 @@ class SudokuCell extends HTMLElement {
     this.dropdown.role = 'listbox';
     this.dropdown.ariaLabel = 'Cell options';
     this.dropdown.classList.toggle(styles.right, this.col > 4);
+    this.dropdown.classList.toggle(styles.top, this.row > 5);
 
     this.appendChild(this.dropdown);
   };
@@ -122,6 +136,7 @@ class SudokuCell extends HTMLElement {
     window.addEventListener(UPDATE_BOARD_ACTION, this.update);
     this.button.addEventListener('click', this.onButtonClick);
     window.addEventListener('click', this.onDocumentClick);
+    this.dropdown.addEventListener('click', this.onDropdownClick);
   }
 
   disconnectedCallback() {
@@ -129,6 +144,7 @@ class SudokuCell extends HTMLElement {
     window.removeEventListener(UPDATE_BOARD_ACTION, this.update);
     this.button.removeEventListener('click', this.onButtonClick);
     window.removeEventListener('click', this.onDocumentClick);
+    this.dropdown.removeEventListener('click', this.onDropdownClick);
   }
 }
 

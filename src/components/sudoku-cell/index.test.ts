@@ -114,4 +114,17 @@ describe('sudoku cell', () => {
 
     expect(cellButton.ariaExpanded).toEqual('false');
   });
+
+  it('sets the cell value if an option is selected', () => {
+    cellButton.click();
+    const option = cellDropdown.querySelector(
+      'button:nth-child(6)'
+    ) as HTMLButtonElement;
+
+    option.click();
+
+    expect(cellButton.innerHTML).toEqual('5');
+    expect(cellButton.ariaExpanded).toEqual('false');
+    expect(cellDropdown.innerHTML).toBeFalsy();
+  });
 });
