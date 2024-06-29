@@ -21,7 +21,7 @@ describe('sudoku cell', () => {
 
     document.body.innerHTML = '<app-sudoku-cell row="2" col="3" />';
     cellButton = document.querySelector(
-      '[aria-label="Sudoku cell row 3 and column 4"]'
+      '[aria-label="Sudoku cell row 3 and column 4. No number selected. Click to select a number."]'
     ) as HTMLButtonElement;
   });
 
@@ -63,5 +63,15 @@ describe('sudoku cell', () => {
     window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
 
     expect(cellButton.classList.contains('finished')).toBeTruthy();
+  });
+
+  it('changes label if a number is selected', () => {
+    state.board.cells[21].value = 5;
+
+    window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
+
+    expect(cellButton.ariaLabel).toEqual(
+      'Sudoku cell row 3 and column 4. 5 is selected. Click to select another number.'
+    );
   });
 });

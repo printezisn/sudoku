@@ -17,6 +17,7 @@ class SudokuCell extends HTMLElement {
       state.board.cells[this.index].initial
     );
     this.button.classList.toggle(styles.finished, state.board.finished);
+    this.button.ariaLabel = this.getButtonLabel();
     this.button.innerHTML =
       state.board.cells[this.index].value?.toString() ?? '';
   };
@@ -25,15 +26,26 @@ class SudokuCell extends HTMLElement {
     this.button.ariaDisabled = state.loading ? 'true' : 'false';
   };
 
+  private getButtonLabel = () => {
+    const value = state.board.cells[this.index].value;
+    if (value == null) {
+      return `Sudoku cell row ${this.row + 1} and column ${
+        this.col + 1
+      }. No number selected. Click to select a number.`;
+    }
+
+    return `Sudoku cell row ${this.row + 1} and column ${
+      this.col + 1
+    }. ${value} is selected. Click to select another number.`;
+  };
+
   connectedCallback() {
     this.row = Number(this.getAttribute('row'));
     this.col = Number(this.getAttribute('col'));
     this.index = this.row * 9 + this.col;
 
     this.button.classList.add(styles.cell);
-    this.button.ariaLabel = `Sudoku cell row ${this.row + 1} and column ${
-      this.col + 1
-    }`;
+    this.button.ariaLabel = this.getButtonLabel();
     this.button.ariaDisabled = 'false';
     this.appendChild(this.button);
 
