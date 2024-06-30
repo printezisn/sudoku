@@ -142,4 +142,14 @@ describe('sudoku cell', () => {
     expect(cellButton.ariaExpanded).toEqual('false');
     expect(cellDropdown.innerHTML).toBeFalsy();
   });
+
+  it('closes the options dropdown if the user presses escape', () => {
+    cellButton.click();
+
+    expect(cellButton.ariaExpanded).toEqual('true');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+    expect(cellButton.ariaExpanded).toEqual('false');
+  });
 });

@@ -58,6 +58,7 @@ class SudokuCell extends HTMLElement {
     }
 
     this.hasClickedButton = true;
+    this.dropdown.innerHTML = '';
 
     [null, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach((value) => {
       const option = document.createElement('button');
@@ -89,6 +90,14 @@ class SudokuCell extends HTMLElement {
 
     const newValue = option.innerHTML === '-' ? null : Number(option.innerHTML);
     updateCell(this.index, newValue);
+    this.button.click();
+  };
+
+  private onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && this.button.ariaExpanded === 'true') {
+      this.update();
+      this.button.focus();
+    }
   };
 
   private setLoading = async () => {
@@ -143,6 +152,7 @@ class SudokuCell extends HTMLElement {
     this.button.addEventListener('click', this.onButtonClick);
     document.addEventListener('click', this.onDocumentClick);
     this.dropdown.addEventListener('click', this.onDropdownClick);
+    document.addEventListener('keydown', this.onKeyDown);
   }
 
   disconnectedCallback() {
@@ -151,6 +161,7 @@ class SudokuCell extends HTMLElement {
     this.button.removeEventListener('click', this.onButtonClick);
     document.removeEventListener('click', this.onDocumentClick);
     this.dropdown.removeEventListener('click', this.onDropdownClick);
+    document.removeEventListener('keydown', this.onKeyDown);
   }
 }
 
