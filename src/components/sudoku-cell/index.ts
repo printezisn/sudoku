@@ -106,15 +106,17 @@ class SudokuCell extends HTMLElement {
 
   private getButtonLabel = () => {
     const value = state.board.cells[this.index].value;
-    if (value == null) {
-      return `Sudoku cell row ${this.row + 1} and column ${
-        this.col + 1
-      }. No number selected. Click to select a number.`;
+    const selectionText =
+      value == null ? 'No number selected.' : `${value} is selected.`;
+    const rowText = `Sudoku cell row ${this.row + 1} and column ${
+      this.col + 1
+    }. ${selectionText}`;
+
+    if (state.board.cells[this.index].initial) {
+      return `${rowText} The number cannot be changed.`;
     }
 
-    return `Sudoku cell row ${this.row + 1} and column ${
-      this.col + 1
-    }. ${value} is selected. Click to select another number.`;
+    return `${rowText} Click to select a number.`;
   };
 
   private initButton = () => {

@@ -105,7 +105,18 @@ describe('sudoku cell', () => {
     window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
 
     expect(cellButton.ariaLabel).toEqual(
-      'Sudoku cell row 3 and column 4. 5 is selected. Click to select another number.'
+      'Sudoku cell row 3 and column 4. 5 is selected. Click to select a number.'
+    );
+  });
+
+  it('has a label that indicates that the number is locked if it is an initial cell', () => {
+    state.board.cells[21].value = 5;
+    state.board.cells[21].initial = true;
+
+    window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
+
+    expect(cellButton.ariaLabel).toEqual(
+      'Sudoku cell row 3 and column 4. 5 is selected. The number cannot be changed.'
     );
   });
 
