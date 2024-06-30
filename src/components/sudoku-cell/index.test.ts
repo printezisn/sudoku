@@ -48,6 +48,7 @@ describe('sudoku cell', () => {
 
     expect(cellButton.innerHTML).toEqual('5');
     expect(cellButton.classList.contains('initial')).toBeFalsy();
+    expect(cellButton.ariaInvalid).toEqual('false');
     expect(cellButton.getAttribute('aria-haspopup')).toEqual('true');
     expect(cellButton.getAttribute('aria-expanded')).toEqual('false');
     expect(cellButton.getAttribute('aria-controls')).toEqual(
@@ -63,6 +64,7 @@ describe('sudoku cell', () => {
 
     expect(cellButton.innerHTML).toEqual('5');
     expect(cellButton.classList.contains('initial')).toBeTruthy();
+    expect(cellButton.ariaInvalid).toEqual('false');
     expect(cellButton.getAttribute('aria-haspopup')).toBeFalsy();
     expect(cellButton.getAttribute('aria-expanded')).toBeFalsy();
     expect(cellButton.getAttribute('aria-controls')).toBeFalsy();
@@ -85,6 +87,16 @@ describe('sudoku cell', () => {
     expect(cellButton.getAttribute('aria-haspopup')).toBeFalsy();
     expect(cellButton.getAttribute('aria-expanded')).toBeFalsy();
     expect(cellButton.getAttribute('aria-controls')).toBeFalsy();
+  });
+
+  it('indicates if it has an error', () => {
+    service.setCellValue(state.board, 20, 7);
+    service.setCellValue(state.board, 21, 7);
+
+    window.dispatchEvent(new CustomEvent(UPDATE_BOARD_ACTION));
+
+    expect(cellButton.classList.contains('error')).toBeTruthy();
+    expect(cellButton.ariaInvalid).toEqual('true');
   });
 
   it('changes label if a number is selected', () => {

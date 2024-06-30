@@ -97,8 +97,8 @@ class ActionButton extends HTMLElement {
     window.addEventListener(UPDATE_BOARD_ACTION, this.setColor);
     this.button.addEventListener('click', this.onButtonClick);
     if (this.menu) {
-      window.addEventListener('keydown', this.onDocumentKeyDown);
-      window.addEventListener('click', this.onDocumentClick);
+      document.addEventListener('keydown', this.onDocumentKeyDown);
+      document.addEventListener('click', this.onDocumentClick);
     }
 
     this.button.innerHTML = `${icons[this.icon] ?? ''}${this.innerHTML}${
@@ -113,8 +113,8 @@ class ActionButton extends HTMLElement {
     window.removeEventListener(UPDATE_BOARD_ACTION, this.setColor);
     this.button.removeEventListener('click', this.onButtonClick);
     if (this.menu) {
-      window.removeEventListener('keydown', this.onDocumentKeyDown);
-      window.removeEventListener('click', this.onDocumentClick);
+      document.removeEventListener('keydown', this.onDocumentKeyDown);
+      document.removeEventListener('click', this.onDocumentClick);
     }
   }
 }

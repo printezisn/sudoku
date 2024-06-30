@@ -89,7 +89,7 @@ describe('ActionButton', () => {
     it('closes the menu if the user clicks escape', () => {
       button.ariaExpanded = 'true';
 
-      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
 
       expect(button.ariaExpanded).toEqual('false');
     });

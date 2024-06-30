@@ -19,7 +19,14 @@ class SudokuCell extends HTMLElement {
       state.board.cells[this.index].initial
     );
     this.button.classList.toggle(styles.finished, state.board.finished);
+    this.button.classList.toggle(
+      styles.error,
+      state.board.cells[this.index].hasError
+    );
     this.button.ariaLabel = this.getButtonLabel();
+    this.button.ariaInvalid = state.board.cells[this.index].hasError
+      ? 'true'
+      : 'false';
     this.button.innerHTML =
       state.board.cells[this.index].value?.toString() ?? '';
     this.button.setAttribute(
@@ -56,10 +63,6 @@ class SudokuCell extends HTMLElement {
       const option = document.createElement('button');
       option.type = 'button';
       option.role = 'option';
-      option.ariaDisabled =
-        value === null || state.board.cells[this.index].options.has(value)
-          ? 'false'
-          : 'true';
       option.ariaSelected =
         state.board.cells[this.index].value === value ? 'true' : 'false';
       option.innerHTML = value === null ? '-' : value.toString();
@@ -138,7 +141,7 @@ class SudokuCell extends HTMLElement {
     window.addEventListener(SET_GAME_LOADING_ACTION, this.setLoading);
     window.addEventListener(UPDATE_BOARD_ACTION, this.update);
     this.button.addEventListener('click', this.onButtonClick);
-    window.addEventListener('click', this.onDocumentClick);
+    document.addEventListener('click', this.onDocumentClick);
     this.dropdown.addEventListener('click', this.onDropdownClick);
   }
 
@@ -146,7 +149,7 @@ class SudokuCell extends HTMLElement {
     window.removeEventListener(SET_GAME_LOADING_ACTION, this.setLoading);
     window.removeEventListener(UPDATE_BOARD_ACTION, this.update);
     this.button.removeEventListener('click', this.onButtonClick);
-    window.removeEventListener('click', this.onDocumentClick);
+    document.removeEventListener('click', this.onDocumentClick);
     this.dropdown.removeEventListener('click', this.onDropdownClick);
   }
 }
