@@ -9,7 +9,8 @@ $color-primary-hue: 199;
 $color-success-hue: 149;
 $color-warning-hue: 51;
 $color-error-hue: 7;
-$color-purple-hue: 281;
+$color-orange-hue: 26;
+$color-pink-hue: 329;
 
 $font-size-base: 16px;
 $line-height-base: 1.5rem;
@@ -94,14 +95,15 @@ $colors: mergeMaps(
       "sudoku-1": "var(--color-content-text)",
       "sudoku-2": "var(--color-primary)",
       "sudoku-3": "var(--color-warning)",
-      "sudoku-4": "var(--color-error)",
-      "sudoku-5": "var(--color-purple)",
+      "sudoku-4": "var(--color-orange)",
+      "sudoku-5": "var(--color-pink)",
     ),
     "other": (
       "success": hsl($color-success-hue, $color-saturation, $color-lightness),
       "warning": hsl($color-warning-hue, $color-saturation, $color-lightness),
       "error": hsl($color-error-hue, $color-saturation, $color-lightness),
-      "purple": hsl($color-purple-hue, $color-saturation, $color-lightness),
+      "pink": hsl($color-pink-hue, $color-saturation, $color-lightness),
+      "orange": hsl($color-orange-hue, $color-saturation, $color-lightness),
       "body": "var(--color-primary-grey-lightest)",
       "body-text": "var(--color-primary-black)",
       "content": "var(--color-primary-white)",
