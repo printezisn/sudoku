@@ -14,7 +14,7 @@ $color-purple-hue: 281;
 $font-size-base: 16px;
 $line-height-base: 1.5rem;
 $total-font-sizes: 6;
-$total-spacings: 6;
+$total-spacings: 10;
 
 @function createColors($name, $hue, $text-lightness) {
   @return (
