@@ -1,6 +1,6 @@
 {
-    "theme_color": "#000000",
-    "background_color": "#ffffff",
+    "theme_color": "#1a1a1a",
+    "background_color": "#d9d9d9",
     "display": "standalone",
     "scope": "/sudoku",
     "start_url": "/sudoku",
