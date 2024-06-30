@@ -90,7 +90,7 @@ class SudokuCell extends HTMLElement {
 
     const newValue = option.innerHTML === '-' ? null : Number(option.innerHTML);
     updateCell(this.index, newValue);
-    this.button.click();
+    this.button.focus();
   };
 
   private onKeyDown = (e: KeyboardEvent) => {
