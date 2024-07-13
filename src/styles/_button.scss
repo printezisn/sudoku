@@ -1,5 +1,4 @@
-button:where(:not([role="switch"])),
-a.button {
+.button {
   background: var(--color-content);
   color: var(--color-content-text);
   border: solid 1px var(--color-content-border);
@@ -20,19 +19,19 @@ a.button {
   text-decoration: none;
 
   &:hover,
-  &:where([aria-disabled="true"]) {
+  &[aria-disabled="true"] {
     background: var(--color-content-hover);
     border-color: var(--color-content-hover-border);
     color: var(--color-content-hover-text);
   }
 
-  &:active:where([aria-disabled="false"]) {
+  &:active[aria-disabled="false"] {
     background: var(--color-content);
     color: var(--color-content-text);
     border-color: var(--color-content-border);
   }
 
-  &:where([aria-disabled="true"]) {
+  &[aria-disabled="true"] {
     cursor: not-allowed;
   }
 
@@ -40,7 +39,7 @@ a.button {
     transition: transform var(--transition-time-quicker);
   }
 
-  &:where([aria-expanded="true"]) {
+  &[aria-expanded="true"] {
     border-block-end: 0;
     border-end-start-radius: 0;
     border-end-end-radius: 0;
@@ -68,15 +67,5 @@ a.button {
       block-size: var(--spacing-1);
       z-index: 3;
     }
-  }
-}
-
-app-action-button:has([aria-expanded="false"]) + * {
-  display: none;
-}
-
-@media (prefers-reduced-motion) {
-  button:not([role="switch"])[aria-expanded]::after {
-    transition: none;
   }
 }

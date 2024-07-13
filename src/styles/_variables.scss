@@ -17,6 +17,8 @@ $line-height-base: 1.5rem;
 $total-font-sizes: 6;
 $total-spacings: 10;
 
+$total-sudoku-colors: 5;
+
 @function createColors($name, $hue, $text-lightness) {
   @return (
     "#{$name}": hsl($hue, $color-saturation, $color-lightness),
@@ -116,6 +118,18 @@ $colors: mergeMaps(
     )
   ),
   0
+);
+
+$dark-theme-colors: (
+  "body": "var(--color-primary-grey-darkest)",
+  "body-text": "var(--color-primary-grey-lightest)",
+  "content": "var(--color-primary-grey-darker)",
+  "content-text": "var(--color-primary-grey-lighter)",
+  "content-border": "var(--color-primary-grey-dark)",
+  "content-hover": "var(--color-primary-grey-dark)",
+  "content-hover-text": "var(--color-primary-white)",
+  "content-hover-border": "var(--color-primary-grey-dark)",
+  "content-shadow": "var(--color-primary-grey-dark-shadow)"
 );
 
 $font-families: (

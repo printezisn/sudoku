@@ -1,3 +1,5 @@
+@use "../../styles/variables";
+
 .cell {
   --cell-bg-color: var(--color-content);
   --cell-text-color: var(--color-content-text);
@@ -8,7 +10,7 @@
   position: relative;
 
   & > button {
-    @for $i from 0 through 5 {
+    @for $i from 0 through variables.$total-sudoku-colors {
       &[data-color="#{$i}"] {
         --cell-text-color: var(--color-sudoku-#{$i + 1});
       }
@@ -36,7 +38,6 @@
     background: var(--cell-bg-color);
     color: var(--cell-text-color);
     border: solid 1px var(--cell-border-color);
-    border-radius: 0;
     display: block;
     inline-size: 100%;
     block-size: 100%;
@@ -44,6 +45,7 @@
     font-weight: var(--cell-font-weight);
     line-height: 0;
     padding: 0;
+    cursor: pointer;
 
     &:hover,
     &:active[aria-disabled="false"],
@@ -51,10 +53,6 @@
       background: var(--cell-bg-color);
       border-color: var(--cell-border-color);
       color: var(--cell-text-color);
-    }
-
-    &[aria-expanded="true"]::before {
-      content: unset;
     }
   }
 
@@ -82,10 +80,10 @@
       background-color: var(--cell-bg-color);
       color: var(--cell-text-color);
       border: 0;
-      border-radius: 0;
       padding: var(--spacing-5);
       font-size: var(--font-size-2);
       line-height: 0;
+      cursor: pointer;
 
       &:hover {
         background-color: var(--color-content-hover);

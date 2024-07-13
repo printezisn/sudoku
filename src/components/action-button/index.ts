@@ -72,6 +72,8 @@ class ActionButton extends HTMLElement {
   };
 
   connectedCallback() {
+    this.classList.add(styles.actionButton);
+
     this.action = this.getAttribute('action') ?? '';
     this.menu = this.getAttribute('menu') ?? '';
     this.icon = this.getAttribute('icon') ?? '';
@@ -86,7 +88,7 @@ class ActionButton extends HTMLElement {
       'data-color',
       actions.state.board.currentColor.toString()
     );
-    this.button.classList.add(styles.button);
+    this.button.classList.add('button');
     if (this.menu) {
       this.button.ariaHasPopup = 'true';
       this.button.setAttribute('aria-controls', this.menu);
