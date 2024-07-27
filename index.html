@@ -35,8 +35,11 @@
         <div class="align-right block">
           <app-theme-switch />
         </div>
-        <h1 class="block">Decisive Sudoku | Find easy to hard sudoku puzzles</h1>
-        <h2 class="block">Find and solve easy to hard sudoku puzzles with a variety of tools in your arsenal. You can use multiple colors for marking and undo actions.</h2>
+        <h1>Decisive Sudoku | Find easy to hard sudoku puzzles</h1>
+        <p class="align-justify">
+          Find and solve easy to hard sudoku puzzles with a variety of tools in your arsenal. You can use multiple colors for marking and undo actions.
+          Check <a href="#how-to-play">how to play</a>.
+        </p>
       </header>
       <main>
         <section class="block">
@@ -82,10 +85,55 @@
           <h2 class="sr-only">Sudoku Board</h2>
           <app-sudoku-board></app-sudoku-board>
         </article>
+        <article class="block align-justify">
+          <h2 id="how-to-play">How to play</h2>
+          <p>
+            A <strong>sudoku</strong> puzzle consists of 3x3 groups, each containing 3x3 cells.
+            Each <strong>cell</strong> must have a value between <strong>1 - 9</strong>.
+            Some cells are pre-filled, but you have to fill the rest following the rules below:
+          </p>
+          <ul>
+            <li>Each value (1 - 9) may appear only <strong>once</strong> in a row.</li>
+            <li>Each value (1 - 9) may appear only <strong>once</strong> in a column.</li>
+            <li>Each value (1 - 9) may appear only <strong>once</strong> in a group.</li>
+          </ul>
+          <p>Once you fill all the cells following the above rules, the sudoku puzzle is complete.</p>
+          <article>
+            <h3>New Puzzle</h3>
+            <p>You can start a new puzzle with the following difficulties:</p>
+            <ul>
+              <li>Easy</li>
+              <li>Normal</li>
+              <li>Hard</li>
+              <li>Empty</li>
+            </ul>
+            <p>
+              The <strong>Empty</strong> difficulty contains an empty puzzle.
+              It's useful if you just want to enter a puzzle you found somewhere and solve it.
+            </p>
+            <p>
+              Finally, you can also select to automatically solve the puzzle.
+            </p>
+          </article>
+          <article>
+            <h3>Multiple colors</h3>
+            <p>
+              You can choose between 5 different colors while filling the cells.
+              This is useful if you want to try a value and undo it leads to a dead end.
+            </p>
+          </article>
+          <article>
+            <h3>Undo</h3>
+            <p>
+              You can undo your last action or all the actions you did with the current color. This is especially useful if you
+              tried a series of actions which led to a dead end.
+            </p>
+          </article>
+        </article>
       </main>
       <footer class="block align-center">
         <nav>
-          <ul>
+          <ul class="no-style">
             <li>
               <a href="https://github.com/printezisn/sudoku" target="_blank" rel="noreferrer" class="button" data-icon="github">
                 Github

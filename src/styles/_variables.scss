@@ -114,7 +114,8 @@ $colors: mergeMaps(
       "content-hover": "var(--color-primary-grey-lightest)",
       "content-hover-text": "var(--color-primary-black)",
       "content-hover-border": "var(--color-primary-grey-light)",
-      "content-shadow": "var(--color-primary-grey-lighter-shadow)"
+      "content-shadow": "var(--color-primary-grey-lighter-shadow)",
+      "link": hsl($color-primary-hue, $color-saturation, 28%)
     )
   ),
   0
@@ -129,7 +130,8 @@ $dark-theme-colors: (
   "content-hover": "var(--color-primary-grey-dark)",
   "content-hover-text": "var(--color-primary-white)",
   "content-hover-border": "var(--color-primary-grey-dark)",
-  "content-shadow": "var(--color-primary-grey-dark-shadow)"
+  "content-shadow": "var(--color-primary-grey-dark-shadow)",
+  "link": hsl($color-primary-hue, $color-saturation, 58%)
 );
 
 $font-families: (
