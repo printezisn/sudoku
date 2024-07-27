@@ -2,11 +2,11 @@
     "theme_color": "#1a1a1a",
     "background_color": "#d9d9d9",
     "display": "standalone",
-    "scope": "/sudoku",
-    "start_url": "/sudoku",
-    "name": "Sudoku",
-    "short_name": "Sudoku",
-    "description": "A simple and nice sudoku game. As simple as that!",
+    "scope": "/sudoku/",
+    "start_url": "/sudoku/",
+    "name": "Decisive Sudoku | Find easy to hard sudoku puzzles",
+    "short_name": "Decisive Sudoku",
+    "description": "Find and solve easy to hard sudoku puzzles with a variety of tools in your arsenal. You can use multiple colors for marking and undo actions.",
     "icons": [
         {
             "src": "/sudoku/manifest/icon-192x192.png",
